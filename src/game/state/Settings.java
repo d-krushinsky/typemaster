@@ -35,20 +35,21 @@ public class Settings implements NState{
 		resolution = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 	
+	
+	// NState starts here
 	protected NActionListener listener = new SettingsListener();
 	public NUIGroup ui = new NUIGroup();
 	
 	public Settings() {	
-		ui.setCamera(TypeMaster.uiCamera);
 		ui.addElement("RESOLUTION_LABEL",
 				new NLabel("Resolution: "+resolution.width+"x"+resolution.height,
 						40, 60, 200, 30));
 		ui.addElement("PREV_RESO", new NButton("Prev", 250, 60, 100, 30));
 		ui.addElement("NEXT_RESO", new NButton("Next", 360, 60, 100, 30));
-
 		ui.addElement("BACK", new NButton("Back", 400, 400, 80, 50));
 		
 		ui.setActionListener(listener);
+		ui.setCamera(TypeMaster.uiCamera);
 	}
 	
 	@Override
@@ -65,5 +66,4 @@ public class Settings implements NState{
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		ui.draw(g, g2d, at);
 	}
-	
 }

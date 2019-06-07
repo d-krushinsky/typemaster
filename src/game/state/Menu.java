@@ -15,7 +15,6 @@ import nightingale.ui.NUIGroup;
 
 public class Menu implements NState{
 	protected NActionListener listener = new MenuListener();
-	
 	public NUIGroup ui = new NUIGroup();
 	
 	public Menu() {

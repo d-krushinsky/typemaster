@@ -15,6 +15,7 @@ import nightingale.thread.NThread;
 import nightingale.util.NCamera;
 
 public class TypeMaster {
+	public static JFrame gameFrame = new JFrame("Type master");
 	public static NInput in = new Input();
 	public static NCanvas canvas = new NCanvas(new Drawer());
 	public static Toolkit kit = Toolkit.getDefaultToolkit();
@@ -26,7 +27,8 @@ public class TypeMaster {
 		}
 	});
 	
-	static JFrame gameFrame = new JFrame("Type master");
+	public static int getFPS() { return renderThread.getTicks(); }
+	public static int getUPS() { return updateThread.getTicks(); }
 	
 	public static NCamera uiCamera = new NCamera();
 	public static NCamera gameCamera = new NCamera();
@@ -43,15 +45,12 @@ public class TypeMaster {
 	  			  kit.getScreenSize().height/2 - gameFrame.getHeight()/2);
 	}
 	
-	public static int getFPS() { return renderThread.getTicks(); }
-	public static int getUPS() { return updateThread.getTicks(); }
-	
 	public static void updateCams() {
 		uiCamera.delta = canvas.getHeight() / (1.0f*Settings.DEFAULT_HEIGHT);
 		gameCamera.delta = canvas.getHeight() / (1.0f*Settings.DEFAULT_HEIGHT);
 	}
 	
-	public static void init() {		
+	public static void init() {
 		//Settings.load();		
 		canvas.setSize(800, 600);
 		//canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
