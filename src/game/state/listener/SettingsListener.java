@@ -7,6 +7,12 @@ import nightingale.ui.NUIElement;
 public class SettingsListener implements NActionListener {
 	@Override
 	public void actionPerform(NUIElement element) {
-		if(element.getName() == "BACK") TypeMaster.stateHandler.setState("MENU_STATE");
+		if(element.getName() == "BACK") {
+			TypeMaster.stateHandler.setState("MENU_STATE");
+		} else if(element.getName() == "NEXT") {
+			
+		} else if(element.getName() == "PREV") {
+			
+		}
 	}
 }
