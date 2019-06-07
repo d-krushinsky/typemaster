@@ -12,11 +12,22 @@ import nightingale.ui.NActionListener;
 import nightingale.ui.NButton;
 import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
+import util.Ring;
 
 public class Settings implements NState{
 	// DEFAULTS
 	public static final int DEFAULT_WIDTH  = 800;
 	public static final int DEFAULT_HEIGHT = 600;
+	
+	//SETTINGS CASES
+	public static final Ring<Dimension> resolutions = new Ring<Dimension>();
+	{
+		resolutions.add(new Dimension(800, 600));
+		resolutions.add(new Dimension(720, 480));
+		resolutions.add(new Dimension(1024, 600));
+		resolutions.add(new Dimension(1024, 768));
+		resolutions.add(new Dimension(1280, 720));
+	}
 	
 	// SETTINGS
 	public static Dimension resolution;
@@ -27,7 +38,8 @@ public class Settings implements NState{
 	protected NActionListener listener = new SettingsListener();
 	public NUIGroup ui = new NUIGroup();
 	
-	public Settings() {		
+	public Settings() {	
+		ui.setCamera(TypeMaster.uiCamera);
 		ui.addElement("RESOLUTION_LABEL",
 				new NLabel("Resolution: "+resolution.width+"x"+resolution.height,
 						40, 60, 200, 30));
@@ -45,6 +57,8 @@ public class Settings implements NState{
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
+		//update labels
+		((NLabel)ui.getElement("RESOLUTION_LABEL")).setText("Resolution: "+resolution.width+"x"+resolution.height);
 	}
 
 	@Override

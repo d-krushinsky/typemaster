@@ -26,10 +26,16 @@ public class TypeMaster {
 		}
 	});
 	
-	static JFrame gameFrame = new JFrame("Izo race");
+	static JFrame gameFrame = new JFrame("Type master");
 	
 	public static NCamera uiCamera = new NCamera();
 	public static NCamera gameCamera = new NCamera();
+	
+	public static void updateResolution() {
+		canvas.setSize(Settings.resolution.width, Settings.resolution.height);
+		updateCams();
+		frameRefresh();
+	}
 	
 	public static void frameRefresh() {
 		gameFrame.pack();
@@ -38,12 +44,11 @@ public class TypeMaster {
 	}
 	
 	public static int getFPS() { return renderThread.getTicks(); }
-	
 	public static int getUPS() { return updateThread.getTicks(); }
 	
-	public void updateCams() {
-		uiCamera.delta = canvas.getHeight() / Settings.DEFAULT_HEIGHT;
-		gameCamera.delta = canvas.getHeight() / Settings.DEFAULT_HEIGHT;
+	public static void updateCams() {
+		uiCamera.delta = canvas.getHeight() / (1.0f*Settings.DEFAULT_HEIGHT);
+		gameCamera.delta = canvas.getHeight() / (1.0f*Settings.DEFAULT_HEIGHT);
 	}
 	
 	public static void init() {		
