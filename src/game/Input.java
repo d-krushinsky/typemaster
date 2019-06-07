@@ -2,11 +2,11 @@ package game;
 
 import java.awt.event.KeyEvent;
 
-import nightingale.input.NInput;
+import expansion.TypeInput;
 import nightingale.input.NKey;
 import nightingale.input.NMouse;
 
-public class Input extends NInput{
+public class Input extends TypeInput{
 	public static NMouse mouse = new NMouse();
 	
 	public Input() {

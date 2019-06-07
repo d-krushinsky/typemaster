@@ -4,20 +4,20 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import expansion.TypeInput;
 import game.state.Game;
 import game.state.Menu;
 import game.state.ModeSelection;
 import game.state.Settings;
 import game.state.Training;
 import nightingale.graph.NCanvas;
-import nightingale.input.NInput;
 import nightingale.state.NStateHandler;
 import nightingale.thread.NThread;
 import nightingale.util.NCamera;
 
 public class TypeMaster {
 	public static JFrame gameFrame = new JFrame("Type master");
-	public static NInput in = new Input();
+	public static TypeInput in = new Input();
 	public static NCanvas canvas = new NCanvas(new Drawer());
 	public static Toolkit kit = Toolkit.getDefaultToolkit();
 	public static NStateHandler stateHandler = new NStateHandler();
