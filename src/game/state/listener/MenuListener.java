@@ -8,5 +8,6 @@ public class MenuListener implements NActionListener {
 	public void actionPerform(NUIElement element) {
 		if(element.getName() == "EXIT") System.exit(1);
 		else if(element.getName() == "SETTINGS") TypeMaster.stateHandler.setState("SETTINGS_STATE");
+		else if(element.getName() == "PLAY") TypeMaster.stateHandler.setState("MODE_SELECTION_STATE");
 	}
 }

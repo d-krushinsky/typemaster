@@ -8,6 +8,7 @@ import game.state.Game;
 import game.state.Menu;
 import game.state.ModeSelection;
 import game.state.Settings;
+import game.state.Training;
 import nightingale.graph.NCanvas;
 import nightingale.input.NInput;
 import nightingale.state.NStateHandler;
@@ -52,15 +53,15 @@ public class TypeMaster {
 	
 	public static void init() {
 		//Settings.load();		
-		canvas.setSize(800, 600);
-		//canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
+		canvas.setSize(Settings.resolution);
 		canvas.addKeyListener(in);
 		canvas.addMouseListener(in);
 		canvas.addMouseMotionListener(in);
 		
 		stateHandler.addState("MENU_STATE", new Menu());
 		stateHandler.addState("SETTINGS_STATE", new Settings());
-		stateHandler.addState("MAP_SELECTION_STATE", new ModeSelection());
+		stateHandler.addState("MODE_SELECTION_STATE", new ModeSelection());
+		stateHandler.addState("TRAINING_STATE", new Training());
 		stateHandler.addState("GAME_STATE", new Game());
 		
 		stateHandler.setState("MENU_STATE");

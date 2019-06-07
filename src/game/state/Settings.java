@@ -21,7 +21,7 @@ public class Settings implements NState{
 	
 	//SETTINGS CASES
 	public static final Ring<Dimension> resolutions = new Ring<Dimension>();
-	{
+	static {
 		resolutions.add(new Dimension(800, 600));
 		resolutions.add(new Dimension(720, 480));
 		resolutions.add(new Dimension(1024, 600));
@@ -31,7 +31,7 @@ public class Settings implements NState{
 	
 	// SETTINGS
 	public static Dimension resolution;
-	{
+	static {
 		resolution = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 	
