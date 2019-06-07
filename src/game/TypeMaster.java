@@ -12,6 +12,7 @@ import nightingale.graph.NCanvas;
 import nightingale.input.NInput;
 import nightingale.state.NStateHandler;
 import nightingale.thread.NThread;
+import nightingale.util.NCamera;
 
 public class TypeMaster {
 	public static NInput in = new Input();
@@ -27,6 +28,9 @@ public class TypeMaster {
 	
 	static JFrame gameFrame = new JFrame("Izo race");
 	
+	public static NCamera uiCamera = new NCamera();
+	public static NCamera gameCamera = new NCamera();
+	
 	public static void frameRefresh() {
 		gameFrame.pack();
 		gameFrame.setLocation(kit.getScreenSize().width /2 - gameFrame.getWidth()/2, 
@@ -37,9 +41,13 @@ public class TypeMaster {
 	
 	public static int getUPS() { return updateThread.getTicks(); }
 	
+	public void updateCams() {
+		uiCamera.delta = canvas.getHeight() / Settings.DEFAULT_HEIGHT;
+		gameCamera.delta = canvas.getHeight() / Settings.DEFAULT_HEIGHT;
+	}
+	
 	public static void init() {		
-		//Settings.load();
-		
+		//Settings.load();		
 		canvas.setSize(800, 600);
 		//canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
 		canvas.addKeyListener(in);

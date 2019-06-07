@@ -25,12 +25,12 @@ public class Menu implements NState{
 		ui.addElement("CREDITS", new NButton("Credits", 0, 300, 100, 40));
 		ui.addElement("EXIT", new NButton("Quit", 0, 400, 100, 40));
 		
+		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);
 	}
 	
 	@Override
 	public void install() {
-		System.out.println(TypeMaster.canvas.getWidth());
 		for(NUIElement element : ui.getElements()) {
 			element.setX(TypeMaster.canvas.getWidth()/2-element.getWidth()/2);
 		}
