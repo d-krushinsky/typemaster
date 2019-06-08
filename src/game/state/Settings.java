@@ -44,9 +44,9 @@ public class Settings implements NState{
 		ui.addElement("RESOLUTION_LABEL",
 				new NLabel("Resolution: "+resolution.width+"x"+resolution.height,
 						40, 60, 200, 30));
-		ui.addElement("PREV_RESO", new NButton("Prev", 250, 60, 100, 30));
-		ui.addElement("NEXT_RESO", new NButton("Next", 360, 60, 100, 30));
-		ui.addElement("BACK", new NButton("Back", 400, 400, 80, 50));
+		ui.addElement("PREV_RESO", new NButton("Prev", 250, 60, 70, 30));
+		ui.addElement("NEXT_RESO", new NButton("Next", 330, 60, 70, 30));
+		ui.addElement("BACK", new NButton("Back", 460, 500, 80, 50));
 		
 		ui.setActionListener(listener);
 		ui.setCamera(TypeMaster.uiCamera);

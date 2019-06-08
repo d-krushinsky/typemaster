@@ -20,9 +20,9 @@ public class Menu implements NState{
 	public Menu() {
 		ui.addElement("TITLE", new NLabel("Type Master", 0, 30, 100, 30));
 		ui.addElement("PLAY", new NButton("Play", 0, 100, 100, 40));
-		ui.addElement("SETTINGS", new NButton("Options", 0, 200, 100, 40));
-		ui.addElement("CREDITS", new NButton("Credits", 0, 300, 100, 40));
-		ui.addElement("EXIT", new NButton("Quit", 0, 400, 100, 40));
+		ui.addElement("SETTINGS", new NButton("Options", 0, 160, 100, 40));
+		ui.addElement("CREDITS", new NButton("Credits", 0, 220, 100, 40));
+		ui.addElement("EXIT", new NButton("Quit", 0, 280, 100, 40));
 		
 		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);
