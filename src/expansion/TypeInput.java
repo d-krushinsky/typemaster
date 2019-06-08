@@ -2,6 +2,7 @@ package expansion;
 
 import java.awt.event.KeyEvent;
 
+import game.TypeMaster;
 import nightingale.input.NInput;
 
 public abstract class TypeInput extends NInput{
@@ -32,7 +33,7 @@ public abstract class TypeInput extends NInput{
 				if(currentString.length() > 0) {
 					currentString = currentString.substring(0, currentString.length()-1);
 				}
-			}else {
+			}else if(TypeMaster.ALPHABET.contains(e.getKeyChar()+"")){
 				currentString += e.getKeyChar();
 			}
 		}

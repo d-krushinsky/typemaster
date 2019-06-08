@@ -16,6 +16,11 @@ import nightingale.thread.NThread;
 import nightingale.util.NCamera;
 
 public class TypeMaster {
+	private static final String ENGLISH  = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	private static final String SYMBOLS  = " !@#$%^&*()_+-=[]{};'\\:\"|,./<>?~";
+	private static final String NUMBERS  = "0123456789";
+	public  static final String ALPHABET = ENGLISH + SYMBOLS + NUMBERS;
+	
 	public static JFrame gameFrame = new JFrame("Type master");
 	public static TypeInput in = new Input();
 	public static NCanvas canvas = new NCanvas(new Drawer());
