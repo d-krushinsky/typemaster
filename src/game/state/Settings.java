@@ -53,7 +53,9 @@ public class Settings implements NState{
 	}
 	
 	@Override
-	public void install() {}
+	public void install() {
+		TypeMaster.in.typingOff();
+	}
 
 	@Override
 	public void update() {

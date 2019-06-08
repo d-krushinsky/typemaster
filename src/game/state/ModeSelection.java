@@ -31,6 +31,7 @@ public class ModeSelection implements NState{
 	
 	@Override
 	public void install() {
+		TypeMaster.in.typingOff();
 		for(NUIElement element : ui.getElements()) {
 			element.setX(TypeMaster.canvas.getWidth()/2-element.getWidth()/2);
 		}

@@ -38,7 +38,9 @@ public class Training implements NState{
 	}
 	
 	@Override
-	public void install() {}
+	public void install() {
+		TypeMaster.in.typingOn();
+	}
 
 	@Override
 	public void update() {
@@ -63,6 +65,11 @@ public class Training implements NState{
 				(int)doll.getY(TypeMaster.gameCamera),
 				(int)doll.getWidth(TypeMaster.gameCamera),
 				(int)doll.getHeight(TypeMaster.gameCamera));
+		g.setColor(Color.WHITE);
+		g.drawString(
+				TypeMaster.in.getCurrentString(),
+				(int)TypeMaster.gameCamera.getX(300), 
+				(int)TypeMaster.gameCamera.getY(450));
 	}
 	
 }
