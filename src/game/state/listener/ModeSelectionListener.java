@@ -10,7 +10,7 @@ public class ModeSelectionListener implements NActionListener {
 		if(element.getName() == "BACK") {
 			TypeMaster.stateHandler.setState("MENU_STATE");
 		}else if(element.getName() == "TRAINING") {
-			//TypeMaster.stateHandler.setState("TRAINING_STATE");
+			TypeMaster.stateHandler.setState("TRAINING_STATE");
 		}else if(element.getName() == "SURVIVE") {
 			
 		}
