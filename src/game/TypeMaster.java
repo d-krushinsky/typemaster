@@ -22,7 +22,7 @@ public class TypeMaster {
 	public  static final String ALPHABET = ENGLISH + SYMBOLS + NUMBERS;
 	
 	public static JFrame gameFrame = new JFrame("Type master");
-	public static TypeInput in = new Input();
+	public static Input in = new Input();
 	public static NCanvas canvas = new NCanvas(new Drawer());
 	public static Toolkit kit = Toolkit.getDefaultToolkit();
 	public static NStateHandler stateHandler = new NStateHandler();

@@ -11,12 +11,15 @@ public abstract class TypeInput extends NInput{
 	protected String currentString = "";
 	protected boolean canTyping = false;
 	
-	public String getTypedString() {
-		return typedString;
+	public String getTypedString() { return typedString; }
+	public String getCurrentString() { return currentString; }
+	
+	public void restoreTypedString() {
+		typedString = "";
 	}
 	
-	public String getCurrentString() {
-		return currentString;
+	public void setCurrentString(String str) {
+		this.currentString = str;
 	}
 	
 	public void typingOff() { canTyping = false; }
@@ -33,7 +36,7 @@ public abstract class TypeInput extends NInput{
 				if(currentString.length() > 0) {
 					currentString = currentString.substring(0, currentString.length()-1);
 				}
-			}else if(TypeMaster.ALPHABET.contains(e.getKeyChar()+"")){
+			}else if(e.getKeyCode() != KeyEvent.VK_TAB && TypeMaster.ALPHABET.contains(e.getKeyChar()+"")){
 				currentString += e.getKeyChar();
 			}
 		}
