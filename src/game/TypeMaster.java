@@ -62,6 +62,8 @@ public class TypeMaster {
 		canvas.addKeyListener(in);
 		canvas.addMouseListener(in);
 		canvas.addMouseMotionListener(in);
+		canvas.setFocusable(true);
+		canvas.setFocusTraversalKeysEnabled(false);
 		
 		stateHandler.addState("MENU_STATE", new Menu());
 		stateHandler.addState("SETTINGS_STATE", new Settings());
@@ -74,7 +76,6 @@ public class TypeMaster {
 		gameFrame.add(canvas);
 		gameFrame.pack();
 		gameFrame.setResizable(false);
-		gameFrame.setFocusable(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setLocation(kit.getScreenSize().width /2 - gameFrame.getWidth()/2, 
 				  			  kit.getScreenSize().height/2 - gameFrame.getHeight()/2);
