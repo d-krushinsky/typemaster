@@ -8,6 +8,7 @@ import java.awt.geom.AffineTransform;
 import game.Input;
 import game.TypeMaster;
 import game.entity.Monster;
+import game.entity.MonsterType;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.state.listener.TrainingListener;
@@ -22,7 +23,7 @@ public class Training implements NState{
 	public NUIGroup ui = new NUIGroup();
 	
 	Wizard wizard = new Wizard();
-	Monster doll = new Monster(-1, "doll");
+	Monster doll = new Monster(MonsterType.Doll, "doll");
 	{
 		wizard.setX(240); wizard.setY(340);
 		wizard.setWidth(30); wizard.setHeight(45);
@@ -43,7 +44,7 @@ public class Training implements NState{
 		TypeMaster.in.typingOn();
 		
 		wizard = new Wizard();
-		doll = new Monster(-1, "doll");
+		doll = new Monster(MonsterType.Doll, "doll");
 		
 		wizard.setX(240); wizard.setY(340);
 		wizard.setWidth(30); wizard.setHeight(45);
@@ -76,18 +77,10 @@ public class Training implements NState{
 		g.drawLine((int)TypeMaster.gameCamera.getX(0), (int)TypeMaster.gameCamera.getY(385),
 				(int)TypeMaster.gameCamera.scale(2000), (int)TypeMaster.gameCamera.scale(385));
 		g.setColor(Color.GREEN);
-		g.drawRect(
-				(int)wizard.getX(TypeMaster.gameCamera),
-				(int)wizard.getY(TypeMaster.gameCamera),
-				(int)wizard.getWidth(TypeMaster.gameCamera),
-				(int)wizard.getHeight(TypeMaster.gameCamera));
+		wizard.draw(g2d, TypeMaster.gameCamera);
 		g.setColor(Color.RED);
 		g.drawString(doll.getName(), (int)doll.getX(TypeMaster.gameCamera),	(int)doll.getY(TypeMaster.gameCamera)-1);
-		g.drawRect(
-				(int)doll.getX(TypeMaster.gameCamera),
-				(int)doll.getY(TypeMaster.gameCamera),
-				(int)doll.getWidth(TypeMaster.gameCamera),
-				(int)doll.getHeight(TypeMaster.gameCamera));
+		doll.draw(g2d, TypeMaster.gameCamera);
 		
 		if(TypeMaster.in.getCurrentString().equals(doll.getName())) {
 			g.setColor(Color.GREEN);

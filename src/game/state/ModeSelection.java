@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 
 import game.Input;
 import game.TypeMaster;
-import game.resources.Animations;
+import game.resources.Sprites;
 import game.state.listener.ModeSelectionListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -38,11 +38,16 @@ public class ModeSelection implements NState{
 		for(NUIElement element : ui.getElements()) {
 			element.setX(TypeMaster.canvas.getWidth()/2-element.getWidth()/2);
 		}
+		Sprites.testAnimator.start();
 	}
 
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
+		Sprites.testAnimator.update();
+		if(Input.ESC_KEY.isClicked()) {
+			Sprites.testAnimator.changeAnimation(1);
+		}
 	}
 
 	@Override
@@ -50,6 +55,7 @@ public class ModeSelection implements NState{
 		ui.draw(g, g2d, at);
 		g.setColor(Color.WHITE);
 		g.fillRect(40, 40, 16, 16);
+		Sprites.testAnimator.draw(40, 40, g2d, TypeMaster.gameCamera);
 	}
 	
 }
