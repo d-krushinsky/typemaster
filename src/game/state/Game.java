@@ -24,7 +24,7 @@ public class Game implements NState{
 
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
-		ui.draw(g, g2d, at);
+		ui.draw(g);
 	}
 	
 }

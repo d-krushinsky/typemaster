@@ -15,6 +15,7 @@ import game.state.listener.TrainingListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
 import nightingale.ui.NButton;
+import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
 import util.Random;
 
@@ -33,10 +34,18 @@ public class Training implements NState{
 	}
 	
 	public Training() {
-		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 60, 40));
+		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 90, 30));
 		
 		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);
+		
+		ui.getElements().forEach( (element) -> { 
+			if(element instanceof NButton) { 
+				((NButton)element).setFont(Fonts.uiFont);
+			}else if(element instanceof NLabel) {
+				((NLabel)element).setFont(Fonts.uiFont);
+			}
+		} );
 	}
 	
 	@Override
@@ -72,7 +81,7 @@ public class Training implements NState{
 
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
-		ui.draw(g, g2d, at);
+		ui.draw(g);
 		g.setColor(Color.LIGHT_GRAY);
 		g.drawLine((int)TypeMaster.gameCamera.getX(0), (int)TypeMaster.gameCamera.getY(385),
 				(int)TypeMaster.gameCamera.scale(2000), (int)TypeMaster.gameCamera.scale(385));

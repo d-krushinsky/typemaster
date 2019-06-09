@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import game.TypeMaster;
+import game.resources.Fonts;
 import game.state.listener.MenuListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -26,6 +27,14 @@ public class Menu implements NState{
 		
 		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);
+		
+		ui.getElements().forEach( (element) -> { 
+			if(element instanceof NButton) { 
+				((NButton)element).setFont(Fonts.uiFont);
+			}else if(element instanceof NLabel) {
+				((NLabel)element).setFont(Fonts.uiFont);
+			}
+		} );
 	}
 	
 	@Override
@@ -43,7 +52,7 @@ public class Menu implements NState{
 
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
-		ui.draw(g, g2d, at);
+		ui.draw(g);
 	}
 	
 }
