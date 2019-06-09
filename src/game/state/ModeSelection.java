@@ -1,10 +1,13 @@
 package game.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
+import game.Input;
 import game.TypeMaster;
+import game.resources.Animations;
 import game.state.listener.ModeSelectionListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -45,6 +48,8 @@ public class ModeSelection implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		ui.draw(g, g2d, at);
+		g.setColor(Color.WHITE);
+		g.fillRect(40, 40, 16, 16);
 	}
 	
 }
