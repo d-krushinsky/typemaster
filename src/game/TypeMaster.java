@@ -4,7 +4,6 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import expansion.TypeInput;
 import game.state.Game;
 import game.state.Menu;
 import game.state.ModeSelection;

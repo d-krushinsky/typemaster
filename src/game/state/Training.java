@@ -9,6 +9,7 @@ import game.Input;
 import game.TypeMaster;
 import game.entity.Monster;
 import game.entity.Wizard;
+import game.resources.Fonts;
 import game.state.listener.TrainingListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
