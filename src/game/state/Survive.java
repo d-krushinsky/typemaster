@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.Input;
 import game.TypeMaster;
 import game.entity.Castle;
 import game.entity.Monster;
@@ -68,38 +69,62 @@ public class Survive implements NState{
 	
 	@Override
 	public void update() {
-		ui.perform(TypeMaster.in);
-		if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
-			startTime = System.currentTimeMillis();
-			monsters.add(new Monster(MonsterType.Goblin, "TEST"));
-			monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
-			monsters.get(monsters.size()-1).setY(-100);
-		}
-		
-		for(Monster monster : monsters) {
-			monster.update();
-			monster.move(speed);
+		synchronized(monsters) {
+			ui.perform(TypeMaster.in);
+			if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
+				startTime = System.currentTimeMillis();
+				monsters.add(new Monster(MonsterType.Goblin, "TEST"));
+				monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
+				monsters.get(monsters.size()-1).setY(-100);
+			}
+			
+			for(Monster monster : monsters) {
+				monster.update();
+				monster.move(speed);
+			}
+			
+			if(Input.ENTER_KEY.isClicked()) {
+				boolean yep = false;
+				for(Monster monster : monsters) {
+					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+						monsters.remove(monster);
+						yep = true;
+						break;
+					}
+				}
+				if(!yep) {
+					TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
+					TypeMaster.in.restoreTypedString();
+				}
+			}
 		}
 	}
 
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		//background
-		g.setColor(Color.RED);
-		for(Monster monster : monsters) {
-			monster.draw(g2d, TypeMaster.gameCamera);
+		synchronized(monsters) {
+			g.setColor(Color.RED);
+			for(Monster monster : monsters) {
+				monster.draw(g2d, TypeMaster.gameCamera);
+			}
 		}
 		//draw whizzbangs
 		g.setColor(Color.DARK_GRAY);
 		castle.draw(g2d, TypeMaster.gameCamera);
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
-		for(Monster monster : monsters) {
-			Fonts.uiFont.draw(
-					monster.getName(),
-					(int)(monster.getCenterX()-(Fonts.uiFont.getStringWidth(monster.getName()))/2),
-					(int)(monster.getY()-Fonts.uiFont.getHeight()), 
-					g2d, TypeMaster.gameCamera);
+		for(Whizzbang whizzbang : whizzbangs) {
+			whizzbang.draw(g2d, TypeMaster.gameCamera);
+		}
+		synchronized(monsters) {
+			for(Monster monster : monsters) {
+				Fonts.uiFont.draw(
+						monster.getName(),
+						(int)(monster.getCenterX()-(Fonts.uiFont.getStringWidth(monster.getName()))/2),
+						(int)(monster.getY()-Fonts.uiFont.getHeight()), 
+						g2d, TypeMaster.gameCamera);
+			}
 		}
 		Fonts.uiFont.draw(
 				TypeMaster.in.getCurrentString(),

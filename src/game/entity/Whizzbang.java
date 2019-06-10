@@ -15,17 +15,16 @@ public class Whizzbang extends Entity{
 	
 	@Override
 	public void update() {
-		animator.update();
+		if(animator != null) animator.update();
 		//MOVE TO TARGET
 	}
 	
 	public Whizzbang(Monster target, WhizzbangType type, int x, int y) {
 		animation = type.getAnimation();
-		setX(x);
-		setY(y);
+		setNObjectAtributes(x, y, type.getWidth(), type.getHeight());
 		this.target = target;
 		animator = new NAnimator(animation, type.getAnimationSpeed());
-		animator.start();
+		if(animator != null) animator.start();
 	}
 	
 	@Override
