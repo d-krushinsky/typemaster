@@ -121,6 +121,9 @@ public class Survive implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		//background
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
+		
 		synchronized(monsters) {
 			g.setColor(Color.RED);
 			for(Monster monster : monsters) {
@@ -134,7 +137,7 @@ public class Survive implements NState{
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		synchronized(whizzbangs){
 			for(Whizzbang whizzbang : whizzbangs) {
-				whizzbang.draw(g2d, TypeMaster.gameCamera);
+				whizzbang.draw(g2d, TypeMaster.gameCamera, at);
 			}
 		}
 		synchronized(monsters) {

@@ -1,9 +1,10 @@
 package game.entity;
 
+import game.resources.Animations;
 import nightingale.graph.animation.NAnimation;
 
 public enum WhizzbangType {
-	Crystal (10, 16, null, 0.0f);
+	Crystal (10, 16, Animations.test, 0.08f);
 	
 	private NAnimation anim;
 	private float animSpeed;

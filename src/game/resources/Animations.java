@@ -5,11 +5,11 @@ import nightingale.graph.animation.NAnimator;
 
 public class Animations {
 
-	public static NAnimation test = new NAnimation("/res/img/anima/test.png", 16);
+	public static NAnimation test = new NAnimation("/res/img/anima/test.png", 10);
 	static {
 		System.out.println(test.getFramesCount());
 	}
 	
-	public static NAnimator testAnimator = new NAnimator(test, 0.05f);
+	public static NAnimator testAnimator = new NAnimator(test, 0.06f);
 	
 }
