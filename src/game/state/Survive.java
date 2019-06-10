@@ -41,10 +41,18 @@ public class Survive implements NState{
 		TypeMaster.in.typingOn();
 		speed = ModeSelection.speed;
 		
-		castle.setWidth(TypeMaster.canvas.getWidth());
-		castle.setHeight((TypeMaster.canvas.getHeight()*15)/100);
+		castle.setWidth(800);
+		castle.setHeight((600*25)/100);
 		castle.setX(0);
-		castle.setY(TypeMaster.canvas.getHeight()-castle.getHeight());
+		castle.setY(600-((600*25)/100));
+		
+		//DELETE THIS
+		wizard.setWidth(45);
+		wizard.setHeight(64);
+		//DELETE THIS
+		
+		wizard.setX(castle.getWidth()/2-wizard.getWidth()/2);
+		wizard.setY(castle.getY() - wizard.getHeight()/2);
 	}
 
 	@Override
@@ -60,6 +68,7 @@ public class Survive implements NState{
 		}
 		g.setColor(Color.DARK_GRAY);
 		castle.draw(g2d, TypeMaster.gameCamera);
+		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		
 		ui.draw(g);
