@@ -1,5 +1,6 @@
 package game.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -39,6 +40,11 @@ public class Survive implements NState{
 	public void install() {
 		TypeMaster.in.typingOn();
 		speed = ModeSelection.speed;
+		
+		castle.setWidth(TypeMaster.canvas.getWidth());
+		castle.setHeight((TypeMaster.canvas.getHeight()*15)/100);
+		castle.setX(0);
+		castle.setY(TypeMaster.canvas.getHeight()-castle.getHeight());
 	}
 
 	@Override
@@ -52,6 +58,7 @@ public class Survive implements NState{
 		for(Monster monster : monsters) {
 			monster.draw(g2d, TypeMaster.gameCamera);
 		}
+		g.setColor(Color.DARK_GRAY);
 		castle.draw(g2d, TypeMaster.gameCamera);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		
