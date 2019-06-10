@@ -25,6 +25,7 @@ import util.Random;
 public class Survive implements NState{
 
 	protected float speed = 0;
+	protected int kills = 0;
 	
 	protected SurviveListener listener = new SurviveListener();
 	
@@ -99,6 +100,7 @@ public class Survive implements NState{
 				}
 				whizzbangs.removeAll(hitted);
 				monsters.removeAll(killed);
+				kills += killed.size(); //FIX!!!!!
 			}
 			
 			if(Input.ENTER_KEY.isClicked()) {
@@ -121,7 +123,7 @@ public class Survive implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		//background
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(new Color(10, 44, 20));
 		g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
 		
 		synchronized(monsters) {
@@ -154,6 +156,7 @@ public class Survive implements NState{
 				(int)(castle.getCenterX() - Fonts.uiFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
 				(int)(castle.getCenterY() - Fonts.uiFont.getHeight()),
 				g2d, TypeMaster.gameCamera);
+		Fonts.uiFont.draw("Kills: "+kills, 40, (int)(castle.getY()+(Fonts.uiFont.getHeight()*3)), g2d, TypeMaster.gameCamera);
 		ui.draw(g);
 	}
 	
