@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import nightingale.graph.animation.NAnimator;
 import nightingale.graph.animation.NSprite;
@@ -29,4 +30,7 @@ public class Wizard extends Entity {
 		}
 	}
 
+	@Override
+	public void draw(Graphics2D g2d, AffineTransform at) {}
+	
 }

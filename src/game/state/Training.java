@@ -26,9 +26,8 @@ public class Training implements NState{
 	Wizard wizard = new Wizard();
 	Monster doll = new Monster(MonsterType.Doll, "doll");
 	{
-		wizard.setX(240); wizard.setY(340);
-		wizard.setWidth(30); wizard.setHeight(45);
-		
+		wizard.setNObjectAtributes(240, 340, 30, 45);
+		doll.setNObjectAtributes(615, 340, 40, 45);
 		doll.setX(615); doll.setY(340);
 		doll.setWidth(40); doll.setHeight(45);
 	}

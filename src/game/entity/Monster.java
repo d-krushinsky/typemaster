@@ -1,6 +1,7 @@
 package game.entity;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import nightingale.graph.animation.NAnimator;
 import nightingale.graph.animation.NSprite;
@@ -42,4 +43,7 @@ public class Monster extends Entity {
 					(int)getHeight(cam));
 		}
 	}
+	
+	@Override
+	public void draw(Graphics2D g2d, AffineTransform at) {}
 }
