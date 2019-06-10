@@ -10,11 +10,13 @@ import java.util.List;
 import game.TypeMaster;
 import game.entity.Castle;
 import game.entity.Monster;
+import game.entity.MonsterType;
 import game.entity.Wizard;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
 import nightingale.ui.NButton;
 import nightingale.ui.NUIGroup;
+import util.Random;
 
 public class Survive implements NState{
 
@@ -40,6 +42,8 @@ public class Survive implements NState{
 	public void install() {
 		TypeMaster.in.typingOn();
 		speed = ModeSelection.speed;
+		monsters.clear();
+		startTime = 0;
 		
 		castle.setWidth(800);
 		castle.setHeight((600*25)/100);
@@ -55,14 +59,28 @@ public class Survive implements NState{
 		wizard.setY(castle.getY() - wizard.getHeight()/2);
 	}
 
+	private long startTime = 0;
+	
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
+		if(startTime == 0 ) {
+			startTime = System.currentTimeMillis();
+			monsters.add(new Monster(MonsterType.Goblin, "TEST"));
+			monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
+			monsters.get(monsters.size()-1).setY(-100);
+		}
+		
+		for(Monster monster : monsters) {
+			monster.update();
+			monster.move(speed);
+		}
 	}
 
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		//background
+		g.setColor(Color.RED);
 		for(Monster monster : monsters) {
 			monster.draw(g2d, TypeMaster.gameCamera);
 		}

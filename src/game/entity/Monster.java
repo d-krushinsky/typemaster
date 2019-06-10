@@ -28,6 +28,10 @@ public class Monster extends Entity {
 		setHeight(type.getHeight());
 	}
 	
+	public void move(float speed) {
+		this.y += speed;
+	}
+	
 	public void update() {
 		if(animator != null)
 			animator.update();
