@@ -12,6 +12,7 @@ import game.entity.Castle;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Wizard;
+import game.resources.Fonts;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
 import nightingale.ui.NButton;
@@ -89,7 +90,18 @@ public class Survive implements NState{
 		castle.draw(g2d, TypeMaster.gameCamera);
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
-		
+		for(Monster monster : monsters) {
+			Fonts.uiFont.draw(
+					monster.getName(),
+					(int)(monster.getCenterX()-(Fonts.uiFont.getStringWidth(monster.getName()))/2),
+					(int)(monster.getY()-Fonts.uiFont.getHeight()), 
+					g2d, TypeMaster.gameCamera);
+		}
+		Fonts.uiFont.draw(
+				TypeMaster.in.getCurrentString(),
+				(int)(castle.getCenterX() - Fonts.uiFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
+				(int)(castle.getCenterY() - Fonts.uiFont.getHeight()),
+				g2d, TypeMaster.gameCamera);
 		ui.draw(g);
 	}
 	
