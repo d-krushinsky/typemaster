@@ -43,6 +43,9 @@ public class Survive implements NState{
 	List<Monster> monsters = new ArrayList<Monster>();
 	List<Whizzbang> whizzbangs = new ArrayList<Whizzbang>();
 	
+	List<Monster> killed = new ArrayList<Monster>();
+	List<Whizzbang> hitted = new ArrayList<Whizzbang>();
+	
 	@Override
 	public void install() {
 		TypeMaster.in.typingOn();
@@ -70,6 +73,8 @@ public class Survive implements NState{
 	
 	@Override
 	public void update() {
+		killed.clear();
+		hitted.clear();
 		synchronized(monsters) {
 			ui.perform(TypeMaster.in);
 			if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
@@ -84,16 +89,27 @@ public class Survive implements NState{
 				monster.move(speed);
 			}
 			
+			synchronized(whizzbangs){
+				for(Whizzbang whizzbang : whizzbangs) {
+					whizzbang.update();
+					if(whizzbang.check()) {
+						killed.add(whizzbang.getTarget());
+						hitted.add(whizzbang);
+					}
+				}
+				whizzbangs.removeAll(hitted);
+				monsters.removeAll(killed);
+			}
+			
 			if(Input.ENTER_KEY.isClicked()) {
 				boolean yep = false;
-				for(Monster monster : monsters) {
+				for(Monster monster : monsters)
 					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-						monsters.remove(monster);
-						whizzbangs.add(new Whizzbang(null, WhizzbangType.Crystal, (int)wizard.getX(), (int)wizard.getY()));
+						//monsters.remove(monster);
+						whizzbangs.add(new Whizzbang(monster, WhizzbangType.Crystal, (int)wizard.getX(), (int)wizard.getY()));
 						yep = true;
 						break;
 					}
-				}
 				if(!yep) {
 					TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 					TypeMaster.in.restoreTypedString();
@@ -116,8 +132,10 @@ public class Survive implements NState{
 		castle.draw(g2d, TypeMaster.gameCamera);
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
-		for(Whizzbang whizzbang : whizzbangs) {
-			whizzbang.draw(g2d, TypeMaster.gameCamera);
+		synchronized(whizzbangs){
+			for(Whizzbang whizzbang : whizzbangs) {
+				whizzbang.draw(g2d, TypeMaster.gameCamera);
+			}
 		}
 		synchronized(monsters) {
 			for(Monster monster : monsters) {

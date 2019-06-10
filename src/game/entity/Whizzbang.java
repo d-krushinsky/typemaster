@@ -11,23 +11,36 @@ public class Whizzbang extends Entity{
 
 	private Monster target;
 	private NAnimation animation;
-	private NAnimator animator;
+	private NAnimator animator = null;
 	
 	// For moving
 	private float angle = 0;
 	private float speed = 3;
 	
+	public Monster getTarget() { return target; }
+	
+	public boolean check() {
+		if(target == null || this.getDistanceTo(target) < 4) 
+			return true;
+		return false;
+	}
+	
 	@Override
 	public void update() {
 		if(animator != null) animator.update();
 		//MOVE TO TARGET
+		angle = (float)Math.toDegrees(Math.atan2(getCenterY()-target.getCenterY(), getCenterX()-target.getCenterX()));
+		
+		float _cx = (float)(getCenterX() - (speed*Math.cos(Math.PI*(angle)/180)));
+		float _cy = (float)(getCenterY() - (speed*Math.sin(Math.PI*(angle)/180)));
+		setCoordsByCenter(_cx, _cy);
 	}
 	
 	public Whizzbang(Monster target, WhizzbangType type, int x, int y) {
 		animation = type.getAnimation();
 		setNObjectAtributes(x, y, type.getWidth(), type.getHeight());
 		this.target = target;
-		animator = new NAnimator(animation, type.getAnimationSpeed());
+		//animator = new NAnimator(animation, type.getAnimationSpeed());
 		if(animator != null) animator.start();
 	}
 	
