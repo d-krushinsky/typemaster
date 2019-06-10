@@ -24,5 +24,5 @@ public abstract class Entity extends NGameObject{
 	
 	public abstract void update();
 	public abstract void draw(Graphics2D g2d, NCamera cam);
-	public abstract void draw(Graphics2D g2d, AffineTransform at);
+	public abstract void draw(Graphics2D g2d, NCamera cam, AffineTransform at);
 }

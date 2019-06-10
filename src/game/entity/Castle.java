@@ -27,6 +27,6 @@ public class Castle extends Entity {
 	}
 	
 	@Override
-	public void draw(Graphics2D g2d, AffineTransform at) {}
+	public void draw(Graphics2D g2d, NCamera cam, AffineTransform at) {}
 	
 }

@@ -40,7 +40,7 @@ public class Whizzbang extends Entity{
 		animation = type.getAnimation();
 		setNObjectAtributes(x, y, type.getWidth(), type.getHeight());
 		this.target = target;
-		//animator = new NAnimator(animation, type.getAnimationSpeed());
+		if(animation!=null) animator = new NAnimator(animation, type.getAnimationSpeed());
 		if(animator != null) animator.start();
 	}
 	
@@ -49,8 +49,8 @@ public class Whizzbang extends Entity{
 		g2d.drawRect((int)getX(), (int)getY(), (int)getWidth(), (int)getHeight());
 	}
 	@Override
-	public void draw(Graphics2D g2d, AffineTransform at) {
-		animator.draw(g2d, at);
+	public void draw(Graphics2D g2d, NCamera cam, AffineTransform at) {
+		animator.draw(g2d, cam, at);
 	}
 
 }
