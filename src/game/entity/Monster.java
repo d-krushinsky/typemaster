@@ -24,6 +24,8 @@ public class Monster extends Entity {
 	public Monster(MonsterType type, String name) {
 		this.type = type.getType();
 		this.name = name;
+		setWidth(type.getWidth());
+		setHeight(type.getHeight());
 	}
 	
 	public void update() {

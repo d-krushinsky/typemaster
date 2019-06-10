@@ -66,6 +66,7 @@ public class Survive implements NState{
 		for(Monster monster : monsters) {
 			monster.draw(g2d, TypeMaster.gameCamera);
 		}
+		//draw whizzbangs
 		g.setColor(Color.DARK_GRAY);
 		castle.draw(g2d, TypeMaster.gameCamera);
 		g.setColor(Color.GREEN);
