@@ -24,11 +24,13 @@ public class ModeSelectionListener implements NActionListener {
 		}else if(element.getName() == "Back_to_selection") {
 			ms.survive = false;
 		}else if(element.getName() == "down_speed") {
-			if(ms.speed > 1) ms.speed--;
-			((NLabel)ms.ssUI.getElement("speed")).setText("Speed: " + ms.speed);
+			if(ModeSelection.speed > 1) ModeSelection.speed--;
+			((NLabel)ms.ssUI.getElement("speed")).setText("Speed: " + ModeSelection.speed);
 		}else if(element.getName() == "up_speed") {
-			if(ms.speed < 10) ms.speed++;
-			((NLabel)ms.ssUI.getElement("speed")).setText("Speed: " + ms.speed);
+			if(ModeSelection.speed < 10) ModeSelection.speed++;
+			((NLabel)ms.ssUI.getElement("speed")).setText("Speed: " + ModeSelection.speed);
+		}else if(element.getName() == "play") {
+			TypeMaster.stateHandler.setState("SURVIVE_STATE");
 		}
 	}
 }

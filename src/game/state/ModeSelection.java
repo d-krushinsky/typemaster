@@ -23,7 +23,7 @@ public class ModeSelection implements NState{
 	
 	public boolean survive = false;
 	
-	public int speed = 1;
+	public static int speed = 1;
 	
 	public ModeSelection() {
 		ui.addElement("TITLE", new NLabel("PLAY", 0, 40, 160, 40));

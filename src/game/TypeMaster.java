@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import game.state.Game;
+import game.state.Survive;
 import game.state.Menu;
 import game.state.ModeSelection;
 import game.state.Settings;
@@ -68,7 +68,7 @@ public class TypeMaster {
 		stateHandler.addState("SETTINGS_STATE", new Settings());
 		stateHandler.addState("MODE_SELECTION_STATE", new ModeSelection());
 		stateHandler.addState("TRAINING_STATE", new Training());
-		stateHandler.addState("GAME_STATE", new Game());
+		stateHandler.addState("SURVIVE_STATE", new Survive());
 		
 		stateHandler.setState("MENU_STATE");
 		
