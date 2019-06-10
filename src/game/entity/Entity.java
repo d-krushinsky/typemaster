@@ -17,6 +17,11 @@ public abstract class Entity extends NGameObject{
 		setHeight(height);
 	}
 	
+	protected void setCoordsByCenter(float cx, float cy) {
+		setX(cx - getWidth()/2);
+		setY(cy - getHeight()/2);
+	}
+	
 	public abstract void update();
 	public abstract void draw(Graphics2D g2d, NCamera cam);
 	public abstract void draw(Graphics2D g2d, AffineTransform at);

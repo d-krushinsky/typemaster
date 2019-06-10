@@ -13,6 +13,10 @@ public class Whizzbang extends Entity{
 	private NAnimation animation;
 	private NAnimator animator;
 	
+	// For moving
+	private float angle = 0;
+	private float speed = 3;
+	
 	@Override
 	public void update() {
 		if(animator != null) animator.update();

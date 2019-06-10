@@ -13,6 +13,7 @@ import game.entity.Castle;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Whizzbang;
+import game.entity.WhizzbangType;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.state.listener.SurviveListener;
@@ -88,6 +89,7 @@ public class Survive implements NState{
 				for(Monster monster : monsters) {
 					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
 						monsters.remove(monster);
+						whizzbangs.add(new Whizzbang(null, WhizzbangType.Crystal, (int)wizard.getX(), (int)wizard.getY()));
 						yep = true;
 						break;
 					}
