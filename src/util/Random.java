@@ -12,4 +12,8 @@ public class Random {
 		return start+random.nextInt(end-start);
 	}
 	
+	public static double randomDouble(int start, int end) {
+		return start+random.nextInt(end-start)+random.nextDouble();
+	}
+	
 }

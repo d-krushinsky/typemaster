@@ -61,11 +61,12 @@ public class Survive implements NState{
 	}
 
 	private long startTime = 0;
+	private float time = 2.6f;
 	
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
-		if(startTime == 0 ) {
+		if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
 			startTime = System.currentTimeMillis();
 			monsters.add(new Monster(MonsterType.Goblin, "TEST"));
 			monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
