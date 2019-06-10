@@ -11,6 +11,7 @@ import game.TypeMaster;
 import game.entity.Castle;
 import game.entity.Monster;
 import game.entity.MonsterType;
+import game.entity.Whizzbang;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.state.listener.SurviveListener;
@@ -38,12 +39,14 @@ public class Survive implements NState{
 	Castle castle = new Castle();
 	Wizard wizard = new Wizard();
 	List<Monster> monsters = new ArrayList<Monster>();
+	List<Whizzbang> whizzbangs = new ArrayList<Whizzbang>();
 	
 	@Override
 	public void install() {
 		TypeMaster.in.typingOn();
 		speed = ModeSelection.speed;
 		monsters.clear();
+		whizzbangs.clear();
 		startTime = 0;
 		
 		castle.setWidth(800);
