@@ -15,7 +15,7 @@ public class Whizzbang extends Entity{
 	
 	// For moving
 	private float angle = 0;
-	private float speed = 3;
+	private float speed = 5.5f;
 	
 	public Monster getTarget() { return target; }
 	
@@ -34,6 +34,7 @@ public class Whizzbang extends Entity{
 		float _cx = (float)(getCenterX() - (speed*Math.cos(Math.PI*(angle)/180)));
 		float _cy = (float)(getCenterY() - (speed*Math.sin(Math.PI*(angle)/180)));
 		setCoordsByCenter(_cx, _cy);
+		speed += 0.005f;
 	}
 	
 	public Whizzbang(Monster target, WhizzbangType type, int x, int y) {

@@ -1,11 +1,11 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 
+import game.resources.Fonts;
 import game.resources.Images;
 import nightingale.graph.NDrawer;
 
@@ -20,12 +20,8 @@ public class Drawer implements NDrawer{
 				(int)TypeMaster.uiCamera.scale(Images.background.getHeight()), null);
 		TypeMaster.stateHandler.drawCurrentState(g, g2d, at);
 		
-		g.setColor(Color.YELLOW);
-		g.drawString("FPS: "+TypeMaster.getFPS(), 
-				TypeMaster.canvas.getWidth()-g.getFontMetrics().stringWidth("FPS: "+TypeMaster.getFPS()),
-				g.getFont().getSize());
-		g.drawString("UPS: "+TypeMaster.getUPS(), 
-				TypeMaster.canvas.getWidth()-g.getFontMetrics().stringWidth("UPS: "+TypeMaster.getUPS()),
-				g.getFont().getSize()*2);
+		Fonts.gameFont.draw("FPS: "+TypeMaster.getFPS(),
+				TypeMaster.canvas.getWidth()-Fonts.gameFont.getStringWidth("FPS: "+TypeMaster.getFPS()),
+				0, g2d, TypeMaster.uiCamera);
 	}
 }
