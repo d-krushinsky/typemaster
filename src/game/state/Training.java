@@ -16,6 +16,7 @@ import game.entity.WhizzbangType;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.resources.Images;
+import game.resources.Words;
 import game.state.listener.TrainingListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -66,12 +67,6 @@ public class Training implements NState{
 		wizard.setWidth(30); wizard.setHeight(45);
 		doll.setX(615); doll.setY(340);
 	}
-
-	// !REMOVE IT WHEN REFACTORING!
-	public String[] words = new String[] {
-		"biba", "jopa", "KAVO i SHO", "Glad", "Dima", "Vlad", "Krol'"
-	};
-	// !REMOVE IT WHEN REFACTORING!
 	
 	@Override
 	public void update() {
@@ -81,7 +76,7 @@ public class Training implements NState{
 			for(Whizzbang whizzbang : whizzbangs) {
 				whizzbang.update();
 				if(whizzbang.check()) {
-					doll.setName(words[Random.randomInt(words.length)]);
+					doll.setName(Words.getRandomWord());
 					hitted.add(whizzbang);
 				}
 			}
@@ -107,9 +102,12 @@ public class Training implements NState{
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		
-		g.setColor(Color.RED);
-		g.drawString(doll.getName(), (int)doll.getX(TypeMaster.gameCamera),	(int)doll.getY(TypeMaster.gameCamera)-1);
 		doll.draw(g2d, TypeMaster.gameCamera);
+		Fonts.gameFont.draw(
+				doll.getName(),
+				(int)(doll.getCenterX()-(Fonts.gameFont.getStringWidth(doll.getName()))/2),
+				(int)(doll.getY()-Fonts.gameFont.getHeight()), 
+				g2d, TypeMaster.gameCamera);
 		
 		synchronized(whizzbangs){
 			for(Whizzbang whizzbang : whizzbangs) {
@@ -117,11 +115,7 @@ public class Training implements NState{
 			}
 		}
 		
-		Fonts.extraFont.draw(
-				TypeMaster.in.getCurrentString(),
-				(int)TypeMaster.gameCamera.getX(300), 
-				(int)TypeMaster.gameCamera.getY(450),
-				g2d, TypeMaster.gameCamera);
+		Fonts.extraFont.draw(TypeMaster.in.getCurrentString(), 300, 450, g2d, TypeMaster.gameCamera);
 	}
 	
 }

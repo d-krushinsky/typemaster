@@ -17,6 +17,7 @@ import game.entity.WhizzbangType;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.resources.Images;
+import game.resources.Words;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
 import nightingale.ui.NButton;
@@ -91,7 +92,7 @@ public class Survive implements NState{
 			ui.perform(TypeMaster.in);
 			if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
 				startTime = System.currentTimeMillis();
-				monsters.add(new Monster(MonsterType.Goblin, "TEST"));
+				monsters.add(new Monster(MonsterType.Goblin, Words.getRandomWord()));
 				monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
 				monsters.get(monsters.size()-1).setY(-100);
 			}
