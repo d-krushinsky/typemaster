@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.Input;
 import game.TypeMaster;
 import game.entity.Monster;
 import game.entity.MonsterType;
+import game.entity.Whizzbang;
+import game.entity.WhizzbangType;
 import game.entity.Wizard;
 import game.resources.Fonts;
 import game.resources.Images;
@@ -31,6 +35,9 @@ public class Training implements NState{
 		doll.setNObjectAtributes(615, 340, 40, 45);
 		doll.setX(615); doll.setY(340);
 	}
+	
+	List<Whizzbang> whizzbangs = new ArrayList<Whizzbang>();
+	List<Whizzbang> hitted = new ArrayList<Whizzbang>();
 	
 	public Training() {
 		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 90, 30));
@@ -69,9 +76,21 @@ public class Training implements NState{
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
+		
+		synchronized(whizzbangs){
+			for(Whizzbang whizzbang : whizzbangs) {
+				whizzbang.update();
+				if(whizzbang.check()) {
+					doll.setName(words[Random.randomInt(words.length)]);
+					hitted.add(whizzbang);
+				}
+			}
+			whizzbangs.removeAll(hitted);
+		}
+		
 		if(Input.ENTER_KEY.isClicked())
 			if(TypeMaster.in.getTypedString().equals(doll.getName())) {
-				doll.setName(words[Random.randomInt(words.length)]);
+				whizzbangs.add(new Whizzbang(doll, WhizzbangType.Fireball, (int)wizard.getX(), (int)wizard.getY()));
 			}else {
 				TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 				TypeMaster.in.restoreTypedString();
@@ -91,6 +110,12 @@ public class Training implements NState{
 		g.setColor(Color.RED);
 		g.drawString(doll.getName(), (int)doll.getX(TypeMaster.gameCamera),	(int)doll.getY(TypeMaster.gameCamera)-1);
 		doll.draw(g2d, TypeMaster.gameCamera);
+		
+		synchronized(whizzbangs){
+			for(Whizzbang whizzbang : whizzbangs) {
+				whizzbang.draw(g2d, TypeMaster.gameCamera, at);
+			}
+		}
 		
 		Fonts.extraFont.draw(
 				TypeMaster.in.getCurrentString(),
