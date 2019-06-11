@@ -23,7 +23,6 @@ import nightingale.ui.NActionListener;
 import nightingale.ui.NButton;
 import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
-import util.Random;
 
 public class Training implements NState{
 	protected NActionListener listener = new TrainingListener();
