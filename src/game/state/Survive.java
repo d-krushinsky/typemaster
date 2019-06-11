@@ -16,9 +16,11 @@ import game.entity.Whizzbang;
 import game.entity.WhizzbangType;
 import game.entity.Wizard;
 import game.resources.Fonts;
+import game.resources.Images;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
 import nightingale.ui.NButton;
+import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
 import util.Random;
 
@@ -36,11 +38,20 @@ public class Survive implements NState{
 		
 		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);
+		
+		ui.getElements().forEach( (element) -> { 
+			if(element instanceof NButton) { 
+				((NButton)element).setFont(Fonts.uiFont);
+				((NButton)element).setImages(Images.pressedButton, Images.focusedButton, Images.calmButton);
+			}else if(element instanceof NLabel) {
+				((NLabel)element).setFont(Fonts.uiFont);
+			}
+		} );
 	}
 	
 	// Entites
 	Castle castle = new Castle();
-	Wizard wizard = new Wizard();
+	Wizard wizard = new Wizard(true);
 	List<Monster> monsters = new ArrayList<Monster>();
 	List<Whizzbang> whizzbangs = new ArrayList<Whizzbang>();
 	
@@ -108,7 +119,7 @@ public class Survive implements NState{
 				for(Monster monster : monsters)
 					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
 						//monsters.remove(monster);
-						whizzbangs.add(new Whizzbang(monster, WhizzbangType.Crystal, (int)wizard.getX(), (int)wizard.getY()));
+						whizzbangs.add(new Whizzbang(monster, WhizzbangType.Fireball, (int)wizard.getX(), (int)wizard.getY()));
 						yep = true;
 						break;
 					}
@@ -123,8 +134,9 @@ public class Survive implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		//background
-		g.setColor(new Color(10, 44, 20));
-		g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
+		g.drawImage(Images.surviveBackground, 0, 0,
+				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getWidth()),
+				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getHeight()), null);
 		
 		synchronized(monsters) {
 			g.setColor(Color.RED);
@@ -132,9 +144,11 @@ public class Survive implements NState{
 				monster.draw(g2d, TypeMaster.gameCamera);
 			}
 		}
-		//draw whizzbangs
+		
 		g.setColor(Color.DARK_GRAY);
 		castle.draw(g2d, TypeMaster.gameCamera);
+		
+		//draw whizzbangs
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		synchronized(whizzbangs){
@@ -144,19 +158,19 @@ public class Survive implements NState{
 		}
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
-				Fonts.uiFont.draw(
+				Fonts.gameFont.draw(
 						monster.getName(),
-						(int)(monster.getCenterX()-(Fonts.uiFont.getStringWidth(monster.getName()))/2),
-						(int)(monster.getY()-Fonts.uiFont.getHeight()), 
+						(int)(monster.getCenterX()-(Fonts.gameFont.getStringWidth(monster.getName()))/2),
+						(int)(monster.getY()-Fonts.gameFont.getHeight()), 
 						g2d, TypeMaster.gameCamera);
 			}
 		}
-		Fonts.uiFont.draw(
+		Fonts.extraFont.draw(
 				TypeMaster.in.getCurrentString(),
-				(int)(castle.getCenterX() - Fonts.uiFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
-				(int)(castle.getCenterY() - Fonts.uiFont.getHeight()),
+				(int)(castle.getCenterX() - Fonts.extraFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
+				(int)(castle.getCenterY() - Fonts.extraFont.getHeight()/2),
 				g2d, TypeMaster.gameCamera);
-		Fonts.uiFont.draw("Kills: "+kills, 40, (int)(castle.getY()+(Fonts.uiFont.getHeight()*3)), g2d, TypeMaster.gameCamera);
+		Fonts.uiFont.draw("Kills: "+kills, 40, (int)(castle.getY()+(Fonts.uiFont.getHeight()*4.5)), g2d, TypeMaster.gameCamera);
 		ui.draw(g);
 	}
 	

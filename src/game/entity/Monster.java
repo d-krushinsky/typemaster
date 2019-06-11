@@ -23,9 +23,12 @@ public class Monster extends Entity {
 	
 	public Monster(MonsterType type, String name) {
 		this.type = type.getType();
+		this.sprite = type.getSprite();
+		if(sprite != null) this.animator = new NAnimator(this.sprite, 0.15f);
 		this.name = name;
 		setWidth(type.getWidth());
 		setHeight(type.getHeight());
+		if(sprite != null) animator.start();
 	}
 	
 	public void move(float speed) {

@@ -6,6 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import game.TypeMaster;
 import game.resources.Fonts;
+import game.resources.Images;
 import game.state.listener.MenuListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -31,8 +32,9 @@ public class Menu implements NState{
 		ui.getElements().forEach( (element) -> { 
 			if(element instanceof NButton) { 
 				((NButton)element).setFont(Fonts.uiFont);
+				((NButton)element).setImages(Images.pressedButton, Images.focusedButton, Images.calmButton);
 			}else if(element instanceof NLabel) {
-				((NLabel)element).setFont(Fonts.uiFont);
+				((NLabel)element).setFont(Fonts.extraFont);
 			}
 		} );
 	}

@@ -10,6 +10,10 @@ public class Sprites {
 		new int[]{ 2, 1 }, 
 		16, 16);
 	
+	public static NSprite goblin = new NSprite(
+		"/res/img/sprites/goblin.png",
+		new int[] { 7}, 40, 57 );
+	
 	public static NAnimator testAnimator = new NAnimator(test, 0.3f);
 	
 }

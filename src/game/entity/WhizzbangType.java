@@ -4,7 +4,7 @@ import game.resources.Animations;
 import nightingale.graph.animation.NAnimation;
 
 public enum WhizzbangType {
-	Crystal (10, 16, Animations.test, 0.08f);
+	Fireball (18, 30, Animations.fireball, 0.08f);
 	
 	private NAnimation anim;
 	private float animSpeed;

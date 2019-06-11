@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 
 import game.TypeMaster;
 import game.resources.Fonts;
+import game.resources.Images;
 import game.state.listener.SettingsListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -24,10 +25,10 @@ public class Settings implements NState{
 	public static final Ring<Dimension> resolutions = new Ring<Dimension>();
 	static {
 		resolutions.add(new Dimension(800, 600));
-		resolutions.add(new Dimension(720, 480));
-		resolutions.add(new Dimension(1024, 600));
+		//resolutions.add(new Dimension(720, 480));
+		//resolutions.add(new Dimension(1024, 600));
 		resolutions.add(new Dimension(1024, 768));
-		resolutions.add(new Dimension(1280, 720));
+		//resolutions.add(new Dimension(1280, 720));
 	}
 	
 	// SETTINGS
@@ -45,8 +46,8 @@ public class Settings implements NState{
 		ui.addElement("RESOLUTION_LABEL",
 				new NLabel("Resolution: "+resolution.width+"x"+resolution.height,
 						40, 60, 200, 30));
-		ui.addElement("PREV_RESO", new NButton("Prev", 250, 60, 70, 30));
-		ui.addElement("NEXT_RESO", new NButton("Next", 330, 60, 70, 30));
+		ui.addElement("PREV_RESO", new NButton("Prev", 300, 60, 70, 30));
+		ui.addElement("NEXT_RESO", new NButton("Next", 380, 60, 70, 30));
 		ui.addElement("BACK", new NButton("Back", 460, 500, 80, 50));
 		
 		ui.setActionListener(listener);
@@ -55,6 +56,7 @@ public class Settings implements NState{
 		ui.getElements().forEach( (element) -> { 
 			if(element instanceof NButton) { 
 				((NButton)element).setFont(Fonts.uiFont);
+				((NButton)element).setImages(Images.pressedButton, Images.focusedButton, Images.calmButton);
 			}else if(element instanceof NLabel) {
 				((NLabel)element).setFont(Fonts.uiFont);
 			}

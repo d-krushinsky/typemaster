@@ -52,7 +52,7 @@ public class Whizzbang extends Entity{
 	public void draw(Graphics2D g2d, NCamera cam, AffineTransform at) {
 		at = AffineTransform.getTranslateInstance(getCenterX(cam), getCenterY(cam));
 		at.scale(cam.delta, cam.delta);
-		at.rotate(Math.toRadians(angle+90));
+		at.rotate(Math.toRadians(angle-90));
 		animator.draw(g2d, cam, at);
 	}
 

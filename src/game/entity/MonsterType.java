@@ -1,10 +1,11 @@
 package game.entity;
 
+import game.resources.Sprites;
 import nightingale.graph.animation.NSprite;
 
 public enum MonsterType {
 	Doll(0, null, 40, 45),
-	Goblin(1, null, 25, 38);
+	Goblin(1, Sprites.goblin, 40, 57);
 	
 	private int type;
 	private NSprite sprite;

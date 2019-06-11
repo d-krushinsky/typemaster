@@ -4,11 +4,16 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
+import game.resources.Images;
 import nightingale.util.NCamera;
 
 public class Castle extends Entity {
 	
 	protected BufferedImage image;
+	
+	public Castle() {
+		this.image = Images.castle;
+	}
 	
 	public void update() {
 		

@@ -11,6 +11,7 @@ import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Wizard;
 import game.resources.Fonts;
+import game.resources.Images;
 import game.state.listener.TrainingListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
@@ -23,7 +24,7 @@ public class Training implements NState{
 	protected NActionListener listener = new TrainingListener();
 	public NUIGroup ui = new NUIGroup();
 	
-	Wizard wizard = new Wizard();
+	Wizard wizard = new Wizard(false);
 	Monster doll = new Monster(MonsterType.Doll, "doll");
 	{
 		wizard.setNObjectAtributes(240, 340, 30, 45);
@@ -40,6 +41,7 @@ public class Training implements NState{
 		ui.getElements().forEach( (element) -> { 
 			if(element instanceof NButton) { 
 				((NButton)element).setFont(Fonts.uiFont);
+				((NButton)element).setImages(Images.pressedButton, Images.focusedButton, Images.calmButton);
 			}else if(element instanceof NLabel) {
 				((NLabel)element).setFont(Fonts.uiFont);
 			}
@@ -50,7 +52,7 @@ public class Training implements NState{
 	public void install() {
 		TypeMaster.in.typingOn();
 		
-		wizard = new Wizard();
+		wizard = new Wizard(false);
 		doll = new Monster(MonsterType.Doll, "doll");
 		
 		wizard.setX(240); wizard.setY(340);
@@ -79,27 +81,22 @@ public class Training implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		ui.draw(g);
-		g.setColor(Color.LIGHT_GRAY);
-		g.drawLine((int)TypeMaster.gameCamera.getX(0), (int)TypeMaster.gameCamera.getY(385),
-				(int)TypeMaster.gameCamera.scale(2000), (int)TypeMaster.gameCamera.scale(385));
+		g.drawImage(Images.surviveBackground, 0, (int)TypeMaster.gameCamera.getY(385),
+				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getWidth()),
+				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getHeight()), null);
+		
 		g.setColor(Color.GREEN);
 		wizard.draw(g2d, TypeMaster.gameCamera);
+		
 		g.setColor(Color.RED);
 		g.drawString(doll.getName(), (int)doll.getX(TypeMaster.gameCamera),	(int)doll.getY(TypeMaster.gameCamera)-1);
 		doll.draw(g2d, TypeMaster.gameCamera);
 		
-		if(TypeMaster.in.getCurrentString().equals(doll.getName())) {
-			g.setColor(Color.GREEN);
-		}else if(doll.getName().length() > TypeMaster.in.getCurrentString().length() &&
-				doll.getName().substring(0, TypeMaster.in.getCurrentString().length()).equals(TypeMaster.in.getCurrentString())){
-			g.setColor(Color.YELLOW);
-		}else {
-			g.setColor(Color.RED);
-		}
-		g.drawString(
+		Fonts.extraFont.draw(
 				TypeMaster.in.getCurrentString(),
 				(int)TypeMaster.gameCamera.getX(300), 
-				(int)TypeMaster.gameCamera.getY(450));
+				(int)TypeMaster.gameCamera.getY(450),
+				g2d, TypeMaster.gameCamera);
 	}
 	
 }
