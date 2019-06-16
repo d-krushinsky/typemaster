@@ -40,7 +40,7 @@ public class Training implements NState{
 	List<Whizzbang> hitted = new ArrayList<Whizzbang>();
 	
 	public Training() {
-		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 90, 30));
+		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 130, 30));
 		
 		ui.setCamera(TypeMaster.uiCamera);
 		ui.setActionListener(listener);

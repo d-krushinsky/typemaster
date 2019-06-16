@@ -7,7 +7,7 @@ import nightingale.ui.NUIElement;
 public class SurviveListener implements NActionListener {	
 	@Override
 	public void actionPerform(NUIElement element) {
-		if(element.getName() == "TO_MENU") {
+		if(element.getName() == "TO_MENU" || element.getName() == "END") {
 			TypeMaster.stateHandler.setState("MENU_STATE");
 		}
 	}

@@ -19,6 +19,12 @@ public class Castle extends Entity {
 		
 	}
 	
+	public int HP() { return this.hp; }
+	public int HP(int hp) {
+		this.hp = hp;
+		return this.hp;
+	}
+	
 	public void draw(Graphics2D g2d, NCamera cam) {
 		if(image != null) {
 			g2d.drawImage(image, (int)getX(cam), (int)getY(cam), (int)getWidth(cam), (int)getHeight(cam), null);

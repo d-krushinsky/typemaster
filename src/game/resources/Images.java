@@ -13,6 +13,7 @@ public class Images {
 	public static BufferedImage wizardTraining = NImageFactory.loadFromFile("/res/img/wizard_training.png");
 	
 	public static BufferedImage castle = NImageFactory.loadFromFile("/res/img/castle.png");
+	public static BufferedImage hpTile = NImageFactory.loadFromFile("/res/img/hp_tile.png");
 	
 	//UI
 	public static BufferedImage calmButton = NImageFactory.loadFromFile("/res/img/ui/calm_button.png");

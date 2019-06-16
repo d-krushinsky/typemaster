@@ -28,8 +28,8 @@ public class ModeSelection implements NState{
 	
 	public ModeSelection() {
 		ui.addElement("TITLE", new NLabel("PLAY", 0, 40, 160, 40));
-		ui.addElement("SURVIVE", new NButton("Survive", 0, 140, 90, 50));
-		ui.addElement("TRAINING", new NButton("Training", 0, 200, 105, 50));
+		ui.addElement("SURVIVE", new NButton("Survive", 0, 140, 110, 50));
+		ui.addElement("TRAINING", new NButton("Training", 0, 200, 125, 50));
 		ui.addElement("BACK", new NButton("Back", 0, 300, 70, 40));
 		ssUI.addElement("Back_to_selection", new NButton("Back", 600, 340, 70, 40));
 		ssUI.addElement("play", new NButton("Play", 450, 240, 80, 50));

@@ -34,7 +34,7 @@ public class Whizzbang extends Entity{
 		float _cx = (float)(getCenterX() - (speed*Math.cos(Math.PI*(angle)/180)));
 		float _cy = (float)(getCenterY() - (speed*Math.sin(Math.PI*(angle)/180)));
 		setCoordsByCenter(_cx, _cy);
-		speed += 0.005f;
+		speed += 0.01f;
 	}
 	
 	public Whizzbang(Monster target, WhizzbangType type, int x, int y) {

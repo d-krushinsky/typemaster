@@ -45,9 +45,15 @@ public class Settings implements NState{
 	public Settings() {	
 		ui.addElement("RESOLUTION_LABEL",
 				new NLabel("Resolution: "+resolution.width+"x"+resolution.height,
-						40, 60, 200, 30));
-		ui.addElement("PREV_RESO", new NButton("Prev", 300, 60, 70, 30));
-		ui.addElement("NEXT_RESO", new NButton("Next", 380, 60, 70, 30));
+						40, 60,
+						Fonts.uiFont.getStringWidth("Resolution: "+resolution.width+"x"+resolution.height)+50, 
+						30));
+		ui.addElement("PREV_RESO", new NButton("Prev",
+				Fonts.uiFont.getStringWidth("Resolution: "+resolution.width+"x"+resolution.height)+90,
+				60, 70, 30));
+		ui.addElement("NEXT_RESO", new NButton("Next",
+				Fonts.uiFont.getStringWidth("Resolution: "+resolution.width+"x"+resolution.height)+90+80,
+				60, 70, 30));
 		ui.addElement("BACK", new NButton("Back", 460, 500, 80, 50));
 		
 		ui.setActionListener(listener);
