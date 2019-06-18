@@ -15,7 +15,7 @@ public class Whizzbang extends Entity{
 	
 	// For moving
 	private float angle = 0;
-	private float speed = 5.5f;
+	private float speed = 6.5f;
 	
 	public Monster getTarget() { return target; }
 	

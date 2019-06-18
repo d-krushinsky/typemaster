@@ -87,6 +87,7 @@ public class Survive implements NState{
 		whizzbangs.clear();
 		startTime = 0;
 		kills = 0;
+		end = false;
 		
 		castle.HP(10);
 		castle.setWidth(800);
@@ -140,6 +141,7 @@ public class Survive implements NState{
 					if(monster.getY() > castle.getY()) {
 						castle.HP(castle.HP()-1);
 						killed.add(monster);
+						kills--;
 					}
 				}
 				
