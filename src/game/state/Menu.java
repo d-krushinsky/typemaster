@@ -23,7 +23,7 @@ public class Menu implements NState{
 		ui.addElement("TITLE", new NLabel("Type Master", 0, 30, Fonts.extraFont.getStringWidth("Type Master"), 30));
 		ui.addElement("PLAY", new NButton("Play", 0, 100, 120, 40));
 		ui.addElement("SETTINGS", new NButton("Options", 0, 160, 120, 40));
-		ui.addElement("CREDITS", new NButton("Credits", 0, 220, 120, 40));
+		ui.addElement("HELP", new NButton("Help", 0, 220, 120, 40));
 		ui.addElement("EXIT", new NButton("Quit", 0, 280, 120, 40));
 		
 		ui.setCamera(TypeMaster.uiCamera);

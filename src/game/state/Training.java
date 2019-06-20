@@ -64,7 +64,7 @@ public class Training implements NState{
 		
 		wizard.setX(240); wizard.setY(340);
 		wizard.setWidth(30); wizard.setHeight(45);
-		doll.setX(615); doll.setY(340);
+		doll.setX(615); doll.setY(342);
 	}
 	
 	@Override

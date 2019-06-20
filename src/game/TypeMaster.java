@@ -4,10 +4,11 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import game.state.Survive;
+import game.state.Help;
 import game.state.Menu;
 import game.state.ModeSelection;
 import game.state.Settings;
+import game.state.Survive;
 import game.state.Training;
 import nightingale.graph.NCanvas;
 import nightingale.state.NStateHandler;
@@ -69,6 +70,7 @@ public class TypeMaster {
 		stateHandler.addState("MODE_SELECTION_STATE", new ModeSelection());
 		stateHandler.addState("TRAINING_STATE", new Training());
 		stateHandler.addState("SURVIVE_STATE", new Survive());
+		stateHandler.addState("HELP_STATE", new Help());
 		
 		stateHandler.setState("MENU_STATE");
 		

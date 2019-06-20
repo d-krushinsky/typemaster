@@ -4,7 +4,7 @@ import game.resources.Sprites;
 import nightingale.graph.animation.NSprite;
 
 public enum MonsterType {
-	Doll(0, null, 40, 45),
+	Doll(0, Sprites.doll, 34, 43),
 	Goblin(1, Sprites.goblin, 40, 57);
 	
 	private int type;
@@ -15,7 +15,6 @@ public enum MonsterType {
 	public NSprite getSprite() { return sprite; }
 	public     int  getWidth() { return  width; }
 	public     int getHeight() { return height; }
-	
 	
 	MonsterType(int type, NSprite sprite, int width, int height) { 
 		this.type = type;
