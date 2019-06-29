@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import nightingale.graph.NImageFactory;
 
 public class Images {
-
 	public static BufferedImage background = NImageFactory.loadFromFile("/res/img/background.png");
 	public static BufferedImage surviveBackground = NImageFactory.loadFromFile("/res/img/survive_background.png");
 	

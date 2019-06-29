@@ -8,13 +8,14 @@ import java.util.Scanner;
 import util.Random;
 
 public class Words {
-
 	private static String[] words;
 	
 	static {
+		FileReader fr;
+		Scanner scan;
 		try {
-			FileReader fr = new FileReader("data/words.tmr");
-			Scanner scan = new Scanner(fr);
+			fr = new FileReader("data/words.tmr");
+			scan = new Scanner(fr);
 			List<String> wordsList = new ArrayList<String>();
 			while(scan.hasNextLine()) {
 				String[] wr = scan.nextLine().split(",");
@@ -33,5 +34,4 @@ public class Words {
 	public static String getRandomWord() {
 		return words[Random.randomInt(words.length)];
 	}
-	
 }

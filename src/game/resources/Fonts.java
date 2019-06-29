@@ -3,7 +3,6 @@ package game.resources;
 import nightingale.graph.NText;
 
 public abstract class Fonts {
-
 	private static String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 1234567890!?()<>[]{}$+-*/\\=&#@:;.,|\"'^";
 	
 	public static NText uiFont = new NText(symbols, 12, 12, "/res/fonts/font_new.png");
@@ -13,7 +12,7 @@ public abstract class Fonts {
 	
 	static {
 		extraFont.expand(2);
-		inputFont.expand(1.5f);
+		inputFont.expand(1.7f);
 	}
 	
 }

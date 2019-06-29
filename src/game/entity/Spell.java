@@ -7,8 +7,7 @@ import nightingale.graph.animation.NAnimation;
 import nightingale.graph.animation.NAnimator;
 import nightingale.util.NCamera;
 
-public class Whizzbang extends Entity{
-
+public class Spell extends Entity{
 	private Monster target;
 	private NAnimation animation;
 	private NAnimator animator = null;
@@ -37,7 +36,7 @@ public class Whizzbang extends Entity{
 		speed += 0.01f;
 	}
 	
-	public Whizzbang(Monster target, WhizzbangType type, int x, int y) {
+	public Spell(Monster target, SpellType type, int x, int y) {
 		animation = type.getAnimation();
 		setNObjectAtributes(x, y, type.getWidth(), type.getHeight());
 		this.target = target;

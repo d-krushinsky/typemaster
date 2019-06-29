@@ -11,9 +11,10 @@ import game.Input;
 import game.TypeMaster;
 import game.entity.Monster;
 import game.entity.MonsterType;
-import game.entity.Whizzbang;
-import game.entity.WhizzbangType;
+import game.entity.Spell;
+import game.entity.SpellType;
 import game.entity.Wizard;
+import game.entity.WizardType;
 import game.resources.Fonts;
 import game.resources.Images;
 import game.resources.Words;
@@ -28,16 +29,9 @@ public class Training implements NState{
 	protected NActionListener listener = new TrainingListener();
 	public NUIGroup ui = new NUIGroup();
 	
-	Wizard wizard = new Wizard(false);
+	Wizard wizard = new Wizard(WizardType.Test);
 	Monster doll = new Monster(MonsterType.Doll, "doll");
-	{
-		wizard.setNObjectAtributes(240, 340, 30, 45);
-		doll.setNObjectAtributes(615, 340, 40, 45);
-		doll.setX(615); doll.setY(340);
-	}
-	
-	List<Whizzbang> whizzbangs = new ArrayList<Whizzbang>();
-	List<Whizzbang> hitted = new ArrayList<Whizzbang>();
+	List<Spell> spells = new ArrayList<Spell>();
 	
 	public Training() {
 		ui.addElement("TO_MENU", new NButton("To Menu", 10, 10, 130, 30));
@@ -59,32 +53,31 @@ public class Training implements NState{
 	public void install() {
 		TypeMaster.in.typingOn();
 		
-		wizard = new Wizard(false);
+		wizard = new Wizard(WizardType.Test);
 		doll = new Monster(MonsterType.Doll, "doll");
 		
-		wizard.setX(240); wizard.setY(340);
-		wizard.setWidth(30); wizard.setHeight(45);
-		doll.setX(615); doll.setY(342);
+		wizard.setX(240); wizard.setY(385-wizard.getHeight());
+		doll.setX(615); doll.setY(385-doll.getHeight());
 	}
 	
 	@Override
 	public void update() {
 		ui.perform(TypeMaster.in);
 		
-		synchronized(whizzbangs){
-			for(Whizzbang whizzbang : whizzbangs) {
-				whizzbang.update();
-				if(whizzbang.check()) {
+		synchronized(spells){
+			for(Spell spell : spells) {
+				spell.update();
+				if(spell.check()) {
 					doll.setName(Words.getRandomWord());
-					hitted.add(whizzbang);
+					spell.setDeletable(true);
 				}
 			}
-			whizzbangs.removeAll(hitted);
+			spells.removeIf(spell -> spell.shoudDelete());
 		}
 		
 		if(Input.ENTER_KEY.isClicked())
 			if(TypeMaster.in.getTypedString().equals(doll.getName())) {
-				whizzbangs.add(new Whizzbang(doll, WhizzbangType.Fireball, (int)wizard.getX(), (int)wizard.getY()));
+				spells.add(new Spell(doll, SpellType.Fireball, (int)wizard.getX(), (int)wizard.getY()));
 			}else {
 				TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 				TypeMaster.in.restoreTypedString();
@@ -108,10 +101,9 @@ public class Training implements NState{
 				(int)(doll.getY()-Fonts.gameFont.getHeight()), 
 				g2d, TypeMaster.gameCamera);
 		
-		synchronized(whizzbangs){
-			for(Whizzbang whizzbang : whizzbangs) {
-				whizzbang.draw(g2d, TypeMaster.gameCamera, at);
-			}
+		synchronized(spells){
+			for(Spell spell : spells) 
+				spell.draw(g2d, TypeMaster.gameCamera, at);
 		}
 		
 		Fonts.extraFont.draw(TypeMaster.in.getCurrentString(), 300, 450, g2d, TypeMaster.gameCamera);

@@ -14,7 +14,6 @@ public class Drawer implements NDrawer{
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 		
-		
 		g.drawImage(Images.background, 0, 0,
 				(int)TypeMaster.uiCamera.scale(Images.background.getWidth()),
 				(int)TypeMaster.uiCamera.scale(Images.background.getHeight()), null);

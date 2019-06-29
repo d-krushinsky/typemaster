@@ -9,6 +9,10 @@ import nightingale.util.NCamera;
 public abstract class Entity extends NGameObject{
 	protected int type;
 	protected int hp;
+	protected boolean delete = false;
+	
+	public boolean shoudDelete() { return delete; }
+	public void setDeletable(boolean deletable) { this.delete = deletable; }
 	
 	public void setNObjectAtributes(int x, int y, int width, int height) {
 		setX(x);

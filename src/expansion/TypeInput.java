@@ -6,7 +6,6 @@ import game.TypeMaster;
 import nightingale.input.NInput;
 
 public abstract class TypeInput extends NInput{
-	
 	protected String typedString = "";
 	protected String currentString = "";
 	protected boolean canTyping = false;

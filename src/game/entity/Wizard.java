@@ -12,11 +12,11 @@ public class Wizard extends Entity {
 	protected NSprite sprite;
 	protected NAnimator animator;
 	
-	//DELETE!!!!!!!!
-	private boolean survive = false;
-	
-	public Wizard(boolean survive) {
-		this.survive = survive;
+	public Wizard(WizardType type) {
+		this.type = type.getType();
+		this.setWidth(type.getWidth());
+		this.setHeight(type.getHeight());
+		this.sprite = type.getSprite();
 	}
 	
 	@Override
@@ -27,11 +27,8 @@ public class Wizard extends Entity {
 
 	@Override
 	public void draw(Graphics2D g2d, NCamera cam) {
-		if(survive) {
-			g2d.drawImage(Images.wizardSurvive, (int)getX(cam), (int)getY(cam), (int)getWidth(cam), (int)getHeight(cam), null);
-		}else {
-			g2d.drawImage(Images.wizardTraining, (int)getX(cam), (int)getY(cam), (int)getWidth(cam), (int)getHeight(cam), null);
-		}
+		g2d.drawImage(Images.wizardSurvive, (int)getX(cam), (int)getY(cam), (int)getWidth(cam), (int)getHeight(cam), null);
+
 		/*
 		if(sprite != null) {
 			animator.draw((int)this.getX(), (int)this.getY(), g2d, cam);

@@ -13,13 +13,8 @@ public class Monster extends Entity {
 	
 	private String name = "";
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
 	
 	public Monster(MonsterType type, String name) {
 		this.type = type.getType();

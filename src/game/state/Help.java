@@ -53,7 +53,7 @@ public class Help implements NState{
 		Fonts.gameFont.draw("spell that kill the monster and you get a points!", 14, 95, g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("If you need change settings, use 'Options' button in", 14, 130, g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("main menu. ", 14, 155, g2d, TypeMaster.gameCamera);
-		Fonts.gameFont.draw("You can just training in 'Training' mode. for start it", 14, 210, g2d, TypeMaster.gameCamera);
+		Fonts.gameFont.draw("You can just training in 'Training' mode. For start it", 14, 210, g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("just use 'Training' button in mode selection menu.", 14, 235, g2d, TypeMaster.gameCamera);
 		
 		Fonts.gameFont.draw("I hope you having fun with this!", 14, 300, g2d, TypeMaster.gameCamera);
