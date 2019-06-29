@@ -21,7 +21,7 @@ public class Drawer implements NDrawer{
 		TypeMaster.stateHandler.drawCurrentState(g, g2d, at);
 		
 		Fonts.gameFont.draw("FPS: "+TypeMaster.getFPS(),
-				TypeMaster.canvas.getWidth()-Fonts.gameFont.getStringWidth("FPS: "+TypeMaster.getFPS()),
+				(int)(TypeMaster.uiCamera.unscale(TypeMaster.canvas.getWidth())-Fonts.gameFont.getStringWidth("FPS: "+TypeMaster.getFPS())),
 				0, g2d, TypeMaster.uiCamera);
 	}
 }
