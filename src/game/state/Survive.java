@@ -29,11 +29,12 @@ import util.Random;
 
 public class Survive implements NState{
 
-	protected float speed = 0;   // Monsters movement speed
-	protected int kills = 0;     // Count of kills
-	private boolean end = false; // Is game ended
-	private long startTime = 0;  // Last spawn time in millis
-	private float time = 2.6f;   // Cooldown of spawn
+	protected float speed = 0;       // Monsters movement speed
+	protected int kills = 0;         // Count of kills
+	private boolean end = false;     // Is game ended
+	private long startTime = 0;      // Last spawn time in millis
+	private float time = 2.6f;       // Cooldown of spawn
+	private boolean paused = false;  // Is game paused
 	
 	protected SurviveListener listener = new SurviveListener();
 	
@@ -107,7 +108,7 @@ public class Survive implements NState{
 	public void update() {
 		if(end) {
 			endUI.perform(TypeMaster.in);
-		}else {
+		}else if(!paused){
 			speed = (1+ModeSelection.speed/10.0f) + (kills/12)/10.0f;
 			synchronized(monsters) {
 				if(castle.HP() <= 0) end = true;
@@ -117,6 +118,15 @@ public class Survive implements NState{
 				updateMonsters();
 				updateSpells();
 				checkInputString();
+				if(Input.ESC_KEY.isClicked()) {
+					TypeMaster.in.typingOff();
+					paused = !paused;
+				}
+			}
+		}else {
+			if(Input.ESC_KEY.isClicked()) {
+				TypeMaster.in.typingOn();
+				paused = !paused;
 			}
 		}
 	}
@@ -218,6 +228,19 @@ public class Survive implements NState{
 			g.setColor(new Color(0, 0, 0, 100));
 			g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
 			endUI.draw(g);
+		}else if(paused) {
+			g.setColor(new Color(0, 0, 0, 100));
+			g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
+			Fonts.extraFont.draw(
+					"Paused",
+					TypeMaster.canvas.getWidth()/2 - Fonts.extraFont.getStringWidth("Paused")/2,
+					TypeMaster.canvas.getHeight()/2 - Fonts.extraFont.getHeight()/2,
+					g2d, TypeMaster.gameCamera);
+			Fonts.gameFont.draw(
+					"(Press ESCAPE for unpause)",
+					TypeMaster.canvas.getWidth()/2 - Fonts.gameFont.getStringWidth("(Press ESCAPE for unpause)")/2,
+					TypeMaster.canvas.getHeight()/2 + Fonts.extraFont.getHeight()/2 ,
+					g2d, TypeMaster.gameCamera);
 		}
 	}
 	

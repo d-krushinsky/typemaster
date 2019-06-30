@@ -22,7 +22,7 @@ public abstract class TypeInput extends NInput{
 	}
 	
 	public void typingOff() { canTyping = false; }
-	public void typingOn()  { canTyping = true;  }
+	public void typingOn()  { canTyping = true; }
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
