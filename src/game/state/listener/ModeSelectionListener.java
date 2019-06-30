@@ -31,6 +31,12 @@ public class ModeSelectionListener implements NActionListener {
 			((NLabel)ms.ssUI.getElement("speed")).setText("Speed: " + ModeSelection.speed);
 		}else if(element.getName() == "play") {
 			TypeMaster.stateHandler.setState("SURVIVE_STATE");
+		}else if(element.getName() == "dif_<") {
+			if(ModeSelection.diff != ModeSelection.Difficulty.EASY) ModeSelection.diff = ModeSelection.Difficulty.EASY;
+			((NLabel)ms.ssUI.getElement("dif_label")).setText(ModeSelection.diff.name());
+		}else if(element.getName() == "dif_>") {
+			if(ModeSelection.diff != ModeSelection.Difficulty.HARD) ModeSelection.diff = ModeSelection.Difficulty.HARD;
+			((NLabel)ms.ssUI.getElement("dif_label")).setText(ModeSelection.diff.name());
 		}
 	}
 }

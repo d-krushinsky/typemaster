@@ -19,6 +19,7 @@ import game.entity.WizardType;
 import game.resources.Fonts;
 import game.resources.Images;
 import game.resources.Words;
+import game.state.ModeSelection.Difficulty;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
 import nightingale.ui.NButton;
@@ -173,11 +174,20 @@ public class Survive implements NState{
 	private void checkInputString() {
 		if(Input.ENTER_KEY.isClicked()) {
 			for(Monster monster : monsters)
-				if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-					spells.add(new Spell(
-							monster, SpellType.Fireball,
-							(int)wizard.getX(), (int)wizard.getY()));
-					return;
+				if(ModeSelection.diff == Difficulty.HARD) {
+					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+						spells.add(new Spell(
+								monster, SpellType.Fireball,
+								(int)wizard.getX(), (int)wizard.getY()));
+						return;
+					}
+				}else if(ModeSelection.diff == Difficulty.EASY) {
+					if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+						spells.add(new Spell(
+								monster, SpellType.Fireball,
+								(int)wizard.getX(), (int)wizard.getY()));
+						return;
+					}
 				}
 			TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 			TypeMaster.in.restoreTypedString();

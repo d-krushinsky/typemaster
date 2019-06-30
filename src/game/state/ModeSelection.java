@@ -16,7 +16,9 @@ import nightingale.ui.NUIElement;
 import nightingale.ui.NUIGroup;
 
 public class ModeSelection implements NState{
-
+	public enum Difficulty{ EASY, HARD };
+	public static Difficulty diff = Difficulty.EASY;
+	
 	protected NActionListener listener = new ModeSelectionListener(this);
 	
 	public NUIGroup ui = new NUIGroup();
@@ -31,11 +33,14 @@ public class ModeSelection implements NState{
 		ui.addElement("SURVIVE", new NButton("Survive", 0, 140, 110, 50));
 		ui.addElement("TRAINING", new NButton("Training", 0, 200, 125, 50));
 		ui.addElement("BACK", new NButton("Back", 0, 300, 70, 40));
-		ssUI.addElement("Back_to_selection", new NButton("Back", 600, 340, 70, 40));
-		ssUI.addElement("play", new NButton("Play", 450, 240, 80, 50));
+		ssUI.addElement("Back_to_selection", new NButton("Back", 600, 360, 70, 40));
+		ssUI.addElement("play", new NButton("Play", 450, 260, 80, 50));
 		ssUI.addElement("speed", new NLabel("Speed: "+speed, 95, 100, 190, 25));
 		ssUI.addElement("down_speed", new NButton("Easier", 95, 130, 90, 40));
 		ssUI.addElement("up_speed", new NButton("Harder", 195, 130, 90, 40));
+		ssUI.addElement("dif_label", new NLabel(diff.name(), 0, 180, 90, 40));
+		ssUI.addElement("dif_<", new NButton("<", 0, 180, 20, 40));
+		ssUI.addElement("dif_>", new NButton(">", 0, 180, 20, 40));
 		
 		ui.setActionListener(listener);
 		ui.setCamera(TypeMaster.uiCamera);
@@ -74,6 +79,8 @@ public class ModeSelection implements NState{
 		ssUI.getElement("down_speed").setX(ssUI.getElement("speed").getX());
 		ssUI.getElement("up_speed").setX(
 			ssUI.getElement("speed").getX()+ssUI.getElement("speed").getWidth() - ssUI.getElement("up_speed").getWidth());
+		ssUI.getElement("dif_<").setX(ssUI.getElement("dif_label").getX()-ssUI.getElement("dif_<").getWidth()-4);
+		ssUI.getElement("dif_>").setX(ssUI.getElement("dif_label").getX()+ssUI.getElement("dif_label").getWidth()+4);
 	}
 
 	@Override
