@@ -37,6 +37,8 @@ public abstract class TypeInput extends NInput{
 				}
 			}else if(e.getKeyCode() != KeyEvent.VK_TAB && TypeMaster.ALPHABET.contains(e.getKeyChar()+"")){
 				currentString += e.getKeyChar();
+			}else if(e.getKeyCode() == KeyEvent.VK_DELETE) {
+				currentString = "";
 			}
 		}
 	}
