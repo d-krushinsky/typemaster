@@ -193,11 +193,23 @@ public class Survive implements NState{
 		
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
+				g.setColor(new Color(0, 0, 0, 50));
+				g.fillOval(
+						(int)monster.getX(TypeMaster.gameCamera),
+						(int)(monster.getY(TypeMaster.gameCamera)+monster.getHeight(TypeMaster.gameCamera)-monster.getHeight(TypeMaster.gameCamera)/7),
+						(int)monster.getWidth(TypeMaster.gameCamera),
+						(int)monster.getHeight(TypeMaster.gameCamera)/5);
 				monster.draw(g2d, TypeMaster.gameCamera);
 			}
 		}
 		
 		castle.draw(g2d, TypeMaster.gameCamera);
+		g.setColor(new Color(0, 0, 0, 100));
+		g.fillOval(
+				(int)wizard.getX(TypeMaster.gameCamera),
+				(int)(wizard.getY(TypeMaster.gameCamera)+wizard.getHeight(TypeMaster.gameCamera)-wizard.getHeight(TypeMaster.gameCamera)/7),
+				(int)wizard.getWidth(TypeMaster.gameCamera),
+				(int)wizard.getHeight(TypeMaster.gameCamera)/5);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		
 		//draw spells
