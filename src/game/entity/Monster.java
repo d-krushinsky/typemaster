@@ -26,6 +26,10 @@ public class Monster extends Entity {
 		if(sprite != null) animator.start();
 	}
 	
+	public void setAnimatorSpeed(float speed) {
+		animator.setSpeed(speed);
+	}
+	
 	public void move(float speed) {
 		this.y += speed;
 	}

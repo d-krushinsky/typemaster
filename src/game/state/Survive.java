@@ -84,7 +84,7 @@ public class Survive implements NState{
 	public void install() {
 		TypeMaster.in.setCurrentString("");
 		TypeMaster.in.typingOn();
-		speed = 1+ModeSelection.speed/10;
+		speed = 1+(ModeSelection.speed*2)/10;
 		monsters.clear();
 		spells.clear();
 		startTime = 0;
@@ -136,7 +136,8 @@ public class Survive implements NState{
 		if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
 			time = (float)Random.randomDouble(1, 3);
 			startTime = System.currentTimeMillis();
-			monsters.add(new Monster(MonsterType.Goblin, Words.getRandomWord()));
+			if(Random.randomInt(2)==1) monsters.add(new Monster(MonsterType.Goblin, Words.getRandomWord()));
+			else monsters.add(new Monster(MonsterType.GoblinBoss, Words.getRandomWord()));
 			monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
 			monsters.get(monsters.size()-1).setY(-100);
 			return true;

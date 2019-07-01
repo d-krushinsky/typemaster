@@ -5,7 +5,8 @@ import nightingale.graph.animation.NSprite;
 
 public enum MonsterType {
 	Doll(0, Sprites.doll, 34, 43),
-	Goblin(1, Sprites.goblin, 40, 57);
+	Goblin(1, Sprites.goblin, 40, 57),
+	GoblinBoss(2, Sprites.goblinBoss, 60, 85);
 	
 	private int type;
 	private NSprite sprite;
