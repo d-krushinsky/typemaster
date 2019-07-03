@@ -16,4 +16,14 @@ public class Random {
 		return start+random.nextInt(end-start)+random.nextDouble();
 	}
 	
+	public static float randomFloat(float start, float end) {
+		float integer = randomInt((int)start, (int)end);
+		float decimal = (randomInt(10)+0.0f)/10;
+		if(integer+decimal < start) {
+			return start;
+		}else if(integer+decimal > end) {
+			return end;
+		}
+		return integer+decimal;
+	}
 }
