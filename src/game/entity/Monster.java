@@ -10,6 +10,7 @@ import nightingale.util.NCamera;
 public class Monster extends Entity {
 	protected NSprite sprite;
 	protected NAnimator animator;
+	protected float v;
 	
 	private String name = "";
 	
@@ -31,7 +32,7 @@ public class Monster extends Entity {
 	}
 	
 	public void move(float speed) {
-		this.y += speed;
+		this.y += (v+speed);
 	}
 	
 	public void update() {
