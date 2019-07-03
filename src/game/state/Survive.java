@@ -16,9 +16,9 @@ import game.entity.Spell;
 import game.entity.SpellType;
 import game.entity.Wizard;
 import game.entity.WizardType;
+import game.logic.Wave;
 import game.resources.Fonts;
 import game.resources.Images;
-import game.resources.Words;
 import game.state.ModeSelection.Difficulty;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
@@ -27,6 +27,7 @@ import nightingale.ui.NLabel;
 import nightingale.ui.NUIElement;
 import nightingale.ui.NUIGroup;
 import util.Random;
+import util.Ring;
 
 public class Survive implements NState{
 
@@ -34,7 +35,6 @@ public class Survive implements NState{
 	protected int kills = 0;         // Count of kills
 	private boolean end = false;     // Is game ended
 	private long startTime = 0;      // Last spawn time in millis
-	private float time = 2.6f;       // Cooldown of spawn
 	private boolean paused = false;  // Is game paused
 	
 	protected SurviveListener listener = new SurviveListener();
@@ -42,7 +42,13 @@ public class Survive implements NState{
 	public NUIGroup ui = new NUIGroup();
 	public NUIGroup endUI = new NUIGroup();
 	
+	protected Ring<Wave> waves = new Ring<Wave>();
+	
 	public Survive() {
+		//All waves
+		waves.add(new Wave(false, Random.randomInt(3, 5), new MonsterType[]{ MonsterType.Goblin }, 1.5f, 3.2f)); //Goblins
+		waves.add(new Wave(true, Random.randomInt(1, 2), new MonsterType[]{ MonsterType.GoblinBoss }, 0, 1)); //Goblins boss
+		
 		ui.addElement("TO_MENU", new NButton("To Menu", 10, 546, 130, 44));
 		endUI.addElement("END", new NButton("END", 0, 380, 90, 40));
 		endUI.addElement("end_label", new NLabel(
@@ -80,6 +86,8 @@ public class Survive implements NState{
 	List<Monster> monsters = new ArrayList<Monster>();
 	List<Spell> spells = new ArrayList<Spell>();
 	
+	Wave wave; // Current wave of monsters
+	
 	@Override
 	public void install() {
 		TypeMaster.in.setCurrentString("");
@@ -87,6 +95,7 @@ public class Survive implements NState{
 		speed = 1+(ModeSelection.speed*2)/10;
 		monsters.clear();
 		spells.clear();
+		wave = new Wave(waves.current());
 		startTime = 0;
 		kills = 0;
 		end = false;
@@ -115,7 +124,13 @@ public class Survive implements NState{
 				if(castle.HP() <= 0) end = true;
 				ui.perform(TypeMaster.in);
 				
-				spawnMonster();
+				if(!wave.isOver()) {
+					if(wave.checkTime((System.currentTimeMillis()-startTime) / 1000.0f)) {
+						wave.spawnMonster(monsters);
+						startTime = System.currentTimeMillis();
+					}
+				}else if(monsters.isEmpty()) wave = new Wave(waves.next());
+				
 				updateMonsters();
 				updateSpells();
 				checkInputString();
@@ -131,27 +146,16 @@ public class Survive implements NState{
 			}
 		}
 	}
-
-	private boolean spawnMonster() {
-		if(startTime == 0 || System.currentTimeMillis()-startTime >= time*1000) {
-			time = (float)Random.randomDouble(1, 3);
-			startTime = System.currentTimeMillis();
-			if(Random.randomInt(2)==1) monsters.add(new Monster(MonsterType.Goblin, Words.getRandomWord()));
-			else monsters.add(new Monster(MonsterType.GoblinBoss, Words.getRandomWord()));
-			monsters.get(monsters.size()-1).setX(Random.randomInt(40, 740));
-			monsters.get(monsters.size()-1).setY(-100);
-			return true;
-		}
-		return false;
-	}
 	
 	private void updateMonsters() {
-		for(Monster monster : monsters) {
-			monster.update();
-			monster.move(speed);
-			if(monster.getY() > castle.getY()) {
-				castle.HP(castle.HP()-1);
-				monster.setDeletable(true);
+		synchronized(monsters) {
+			for(Monster monster : monsters) {
+				monster.update();
+				monster.move(speed);
+				if(monster.getY() > castle.getY()) {
+					castle.HP(castle.HP()-1);
+					monster.setDeletable(true);
+				}
 			}
 		}
 	}
@@ -174,22 +178,26 @@ public class Survive implements NState{
 	
 	private void checkInputString() {
 		if(Input.ENTER_KEY.isClicked()) {
-			for(Monster monster : monsters)
-				if(ModeSelection.diff == Difficulty.HARD) {
-					if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-						spells.add(new Spell(
-								monster, SpellType.Fireball,
-								(int)wizard.getX(), (int)wizard.getY()));
-						return;
-					}
-				}else if(ModeSelection.diff == Difficulty.EASY) {
-					if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
-						spells.add(new Spell(
-								monster, SpellType.Fireball,
-								(int)wizard.getX(), (int)wizard.getY()));
-						return;
-					}
+			synchronized(monsters) {
+				synchronized(spells) {
+					for(Monster monster : monsters)
+						if(ModeSelection.diff == Difficulty.HARD) {
+							if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+								spells.add(new Spell(
+										monster, SpellType.Fireball,
+										(int)wizard.getX(), (int)wizard.getY()));
+								return;
+							}
+						}else if(ModeSelection.diff == Difficulty.EASY) {
+							if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+								spells.add(new Spell(
+										monster, SpellType.Fireball,
+										(int)wizard.getX(), (int)wizard.getY()));
+								return;
+							}
+						}
 				}
+			}
 			TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 			TypeMaster.in.restoreTypedString();
 		}

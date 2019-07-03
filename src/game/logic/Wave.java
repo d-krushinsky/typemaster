@@ -17,6 +17,15 @@ public class Wave {
 	protected float minTime = 0, maxTime = 0;
 	protected float spawnTime = 0;
 	
+	public Wave(Wave wave) {
+		this.boss = wave.boss;
+		this.count = wave.count;
+		this.types = wave.types;
+		this.minTime = wave.minTime;
+		this.maxTime = wave.maxTime;
+		genSpawnTime();
+	}
+	
 	public Wave(boolean boss, int count, MonsterType[] types, float minTime, float maxTime) {
 		this.boss = boss;
 		this.count = count;
