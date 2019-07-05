@@ -24,6 +24,7 @@ public class Monster extends Entity {
 		this.name = name;
 		setWidth(type.getWidth());
 		setHeight(type.getHeight());
+		this.v = type.V();
 		if(sprite != null) animator.start();
 	}
 	
