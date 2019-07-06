@@ -47,7 +47,7 @@ public class Survive implements NState{
 	protected Ring<Wave> waves = new Ring<Wave>();
 	
 	public Survive() {
-		//All waves
+		// All waves
 		waves.add(new Wave(false, Random.randomInt(3, 5), new MonsterType[]{ MonsterType.Goblin }, 1.5f, 3.2f)); //Goblins
 		waves.add(new Wave(true, Random.randomInt(1, 2), new MonsterType[]{ MonsterType.GoblinBoss }, 0, 1)); //Goblins boss
 		
@@ -161,16 +161,14 @@ public class Survive implements NState{
 	}
 	
 	private void updateMonsters() {
-		synchronized(monsters) {
-			for(Monster monster : monsters) {
-				monster.update();
-				monster.move(speed);
-				if(monster.getY() > castle.getY()) {
-					castle.HP(castle.HP()-1);
-					monster.setDeletable(true);
-				}
-				if(monster.HP()<=0) monster.setDeletable(true);
+		for(Monster monster : monsters) {
+			monster.update();
+			monster.move(speed);
+			if(monster.getY() > castle.getY()) {
+				castle.HP(castle.HP()-1);
+				monster.setDeletable(true);
 			}
+			if(monster.HP()<=0) monster.setDeletable(true);
 		}
 	}
 	
@@ -292,11 +290,11 @@ public class Survive implements NState{
 							(int)(monster.getY()-Fonts.gameFont.getHeight()), 
 							g2d, TypeMaster.gameCamera);
 				}else {
-					for(int i=0;i<5;i++) {
-						Fonts.gameFont.draw(
+					for(int i=0;i<8;i++) {
+						Fonts.spellFont.draw(
 								bossWords.getRight(i), 
-								(int)(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH-Fonts.gameFont.getStringWidth(bossWords.getRight(i))), 
-								(int)(Layout.BOSS_WORDS_Y-(i*Fonts.gameFont.getHeight())), 
+								(int)(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH-Fonts.spellFont.getStringWidth(bossWords.getRight(i))), 
+								(int)(Layout.BOSS_WORDS_Y-(i*Fonts.spellFont.getHeight())), 
 								g2d, TypeMaster.gameCamera);
 					}
 				}

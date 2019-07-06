@@ -10,7 +10,6 @@ import game.resources.Words;
 import util.Random;
 
 public class Wave {
-
 	protected boolean boss = false;
 	protected int count = 0;
 	protected MonsterType[] types;
@@ -57,5 +56,4 @@ public class Wave {
 			genSpawnTime();
 		}
 	}
-	
 }

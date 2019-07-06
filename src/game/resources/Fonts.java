@@ -9,10 +9,12 @@ public abstract class Fonts {
 	public static NText extraFont = new NText(symbols, 12, 12, "/res/fonts/font_new.png");
 	public static NText gameFont = new NText(symbols, 12, 12, "/res/fonts/font_new.png");
 	public static NText inputFont = new NText(symbols, 12, 12, "/res/fonts/font_new.png");
+	public static NText spellFont = new NText(symbols, 12, 12, "/res/fonts/font_new.png");
 	
 	static {
 		extraFont.expand(2);
 		inputFont.expand(1.7f);
+		spellFont.expand(1.2f);
 	}
 	
 }
