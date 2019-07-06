@@ -17,6 +17,7 @@ import game.entity.Spell;
 import game.entity.Wizard;
 import game.entity.WizardType;
 import game.entity.spell.Fireball;
+import game.entity.spell.MagicMissile;
 import game.logic.Wave;
 import game.resources.Fonts;
 import game.resources.Images;
@@ -184,18 +185,18 @@ public class Survive implements NState{
 						kills++;
 					}else spell.getTarget().HP(spell.getTarget().HP()-1);
 					spell.setDeletable(true);
-					spell.magic(monsters);
 				}
-				if(spell.getTarget().shoudDelete()) spell.setDeletable(true);
+				if(spell.getTarget().shouldDelete()) spell.setDeletable(true);
+				spell.magic(monsters);
 			}
 		}
 	}
 	
 	public void deleteDeletable() {
 		synchronized (spells) {
-			spells.removeIf(spell -> spell.shoudDelete() );
+			spells.removeIf(spell -> spell.shouldDelete() );
 		}
-		monsters.removeIf(monster -> monster.shoudDelete());
+		monsters.removeIf(monster -> monster.shouldDelete());
 	}
 	
 	// If it's boss, find nearest monster and check, is current spell typed

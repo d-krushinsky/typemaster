@@ -72,7 +72,7 @@ public class Training implements NState{
 					spell.setDeletable(true);
 				}
 			}
-			spells.removeIf(spell -> spell.shoudDelete());
+			spells.removeIf(spell -> spell.shouldDelete());
 		}
 		
 		if(Input.ENTER_KEY.isClicked())

@@ -11,7 +11,7 @@ public abstract class Entity extends NGameObject{
 	protected int hp;
 	protected boolean delete = false;
 	
-	public boolean shoudDelete() { return delete; }
+	public boolean shouldDelete() { return delete; }
 	public void setDeletable(boolean deletable) { this.delete = deletable; }
 	
 	public int HP() { return this.hp; }

@@ -9,7 +9,7 @@ import nightingale.graph.animation.NAnimator;
 import nightingale.util.NCamera;
 
 public abstract class Spell extends Entity{
-	private Monster target;
+	protected Monster target;
 	private NAnimation animation;
 	private NAnimator animator = null;
 	
