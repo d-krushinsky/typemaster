@@ -291,7 +291,7 @@ public class Survive implements NState{
 					for(int i=0;i<5;i++) {
 						Fonts.gameFont.draw(
 								bossWords.getRight(i), 
-								(int)(TypeMaster.canvas.getWidth()-Layout.SPELL_BAR_WIDTH-Fonts.gameFont.getStringWidth(bossWords.getRight(i))), 
+								(int)(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH-Fonts.gameFont.getStringWidth(bossWords.getRight(i))), 
 								(int)(Layout.BOSS_WORDS_Y-(i*Fonts.gameFont.getHeight())), 
 								g2d, TypeMaster.gameCamera);
 					}
@@ -316,15 +316,14 @@ public class Survive implements NState{
 			g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
 			Fonts.extraFont.draw(
 					"Paused",
-					TypeMaster.canvas.getWidth()/2 - Fonts.extraFont.getStringWidth("Paused")/2,
-					TypeMaster.canvas.getHeight()/2 - Fonts.extraFont.getHeight()/2,
+					Settings.DEFAULT_WIDTH/2 - Fonts.extraFont.getStringWidth("Paused")/2,
+					Settings.DEFAULT_HEIGHT/2 - Fonts.extraFont.getHeight()/2,
 					g2d, TypeMaster.gameCamera);
 			Fonts.gameFont.draw(
 					"(Press ESCAPE for unpause)",
-					TypeMaster.canvas.getWidth()/2 - Fonts.gameFont.getStringWidth("(Press ESCAPE for unpause)")/2,
-					TypeMaster.canvas.getHeight()/2 + Fonts.extraFont.getHeight()/2 ,
+					Settings.DEFAULT_WIDTH/2 - Fonts.gameFont.getStringWidth("(Press ESCAPE for unpause)")/2,
+					Settings.DEFAULT_HEIGHT/2 + Fonts.extraFont.getHeight()/2 ,
 					g2d, TypeMaster.gameCamera);
 		}
 	}
-	
 }
