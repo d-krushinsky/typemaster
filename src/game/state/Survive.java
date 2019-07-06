@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.Input;
+import game.Layout;
 import game.TypeMaster;
 import game.entity.Castle;
 import game.entity.Monster;
@@ -19,6 +20,7 @@ import game.entity.WizardType;
 import game.logic.Wave;
 import game.resources.Fonts;
 import game.resources.Images;
+import game.resources.Words;
 import game.state.ModeSelection.Difficulty;
 import game.state.listener.SurviveListener;
 import nightingale.state.NState;
@@ -115,6 +117,13 @@ public class Survive implements NState{
 		}
 	}
 	
+	private void genBossWords() {
+		bossWords.clear();
+		for(int i=0;i<30;i++) {
+			bossWords.add(Words.getRandomWord());
+		}
+	}
+	
 	@Override
 	public void update() {
 		if(end) {
@@ -128,6 +137,9 @@ public class Survive implements NState{
 				if(!wave.isOver()) {
 					if(wave.checkTime((System.currentTimeMillis()-startTime) / 1000.0f)) {
 						wave.spawnMonster(monsters);
+						if(wave.isBoss()) {
+							genBossWords();
+						}
 						startTime = System.currentTimeMillis();
 					}
 				}else if(monsters.isEmpty()) wave = new Wave(waves.next());
@@ -157,20 +169,23 @@ public class Survive implements NState{
 					castle.HP(castle.HP()-1);
 					monster.setDeletable(true);
 				}
+				if(monster.HP()<=0) monster.setDeletable(true);
 			}
 		}
 	}
 	
 	private void updateSpells() {
 		synchronized(spells){
-			for(Spell whizzbang : spells) {
-				whizzbang.update();
-				if(whizzbang.check()) {
-					whizzbang.getTarget().setDeletable(true);
-					whizzbang.setDeletable(true);
-					kills++;
+			for(Spell spell : spells) {
+				spell.update();
+				if(spell.check()) {
+					if(!wave.isBoss()) {
+						spell.getTarget().setDeletable(true);
+						kills++;
+					}else spell.getTarget().HP(spell.getTarget().HP()-1);
+					spell.setDeletable(true);
 				}
-				if(whizzbang.getTarget().shoudDelete()) whizzbang.setDeletable(true);
+				if(spell.getTarget().shoudDelete()) spell.setDeletable(true);
 			}
 			spells.removeIf(spell -> spell.shoudDelete() );
 			monsters.removeIf(monster -> monster.shoudDelete());
@@ -181,22 +196,48 @@ public class Survive implements NState{
 		if(Input.ENTER_KEY.isClicked()) {
 			synchronized(monsters) {
 				synchronized(spells) {
-					for(Monster monster : monsters)
+					if(!wave.isBoss()) {
+						for(Monster monster : monsters)
+							if(ModeSelection.diff == Difficulty.HARD) {
+								if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+									spells.add(new Spell(
+											monster, SpellType.Fireball,
+											(int)wizard.getX(), (int)wizard.getY()));
+									return;
+								}
+							}else if(ModeSelection.diff == Difficulty.EASY) {
+								if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+									spells.add(new Spell(
+											monster, SpellType.Fireball,
+											(int)wizard.getX(), (int)wizard.getY()));
+									return;
+								}
+							}
+					}else {
+						Monster nearest = null;
+						for(Monster monster : monsters) {
+							if(nearest == null || monster.getY()+monster.getHeight() < nearest.getY()+nearest.getHeight()) {
+								nearest = monster;
+							}
+						}
 						if(ModeSelection.diff == Difficulty.HARD) {
-							if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+							if(bossWords.current().equals(TypeMaster.in.getTypedString())) {
+								bossWords.next();
 								spells.add(new Spell(
-										monster, SpellType.Fireball,
+										nearest, SpellType.Fireball,
 										(int)wizard.getX(), (int)wizard.getY()));
 								return;
 							}
 						}else if(ModeSelection.diff == Difficulty.EASY) {
-							if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+							if(bossWords.current().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+								bossWords.next();
 								spells.add(new Spell(
-										monster, SpellType.Fireball,
+										nearest, SpellType.Fireball,
 										(int)wizard.getX(), (int)wizard.getY()));
 								return;
 							}
 						}
+					}
 				}
 			}
 			TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
@@ -247,7 +288,13 @@ public class Survive implements NState{
 							(int)(monster.getY()-Fonts.gameFont.getHeight()), 
 							g2d, TypeMaster.gameCamera);
 				}else {
-					
+					for(int i=0;i<5;i++) {
+						Fonts.gameFont.draw(
+								bossWords.getRight(i), 
+								(int)(TypeMaster.canvas.getWidth()-Layout.SPELL_BAR_WIDTH-Fonts.gameFont.getStringWidth(bossWords.getRight(i))), 
+								(int)(Layout.BOSS_WORDS_Y-(i*Fonts.gameFont.getHeight())), 
+								g2d, TypeMaster.gameCamera);
+					}
 				}
 			}
 		}

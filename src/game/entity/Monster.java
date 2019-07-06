@@ -26,6 +26,7 @@ public class Monster extends Entity {
 		setHeight(type.getHeight());
 		this.v = type.V();
 		if(sprite != null) animator.start();
+		HP(type.HP());
 	}
 	
 	public void setAnimatorSpeed(float speed) {
