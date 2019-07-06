@@ -182,6 +182,7 @@ public class Survive implements NState{
 						kills++;
 					}else spell.getTarget().HP(spell.getTarget().HP()-1);
 					spell.setDeletable(true);
+					spell.magic(monsters);
 				}
 				if(spell.getTarget().shoudDelete()) spell.setDeletable(true);
 			}

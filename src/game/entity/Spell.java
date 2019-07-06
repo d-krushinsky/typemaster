@@ -2,6 +2,7 @@ package game.entity;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.List;
 
 import nightingale.graph.animation.NAnimation;
 import nightingale.graph.animation.NAnimator;
@@ -22,6 +23,10 @@ public class Spell extends Entity{
 		if(target == null || this.getDistanceTo(target) < 4) 
 			return true;
 		return false;
+	}
+	
+	public void magic(List<Monster> list) {
+		
 	}
 	
 	@Override
