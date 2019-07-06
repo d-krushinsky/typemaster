@@ -192,6 +192,8 @@ public class Survive implements NState{
 		}
 	}
 	
+	// If it's boss, find nearest monster and check, is current spell typed
+	// If it's monsters, find monster with typed name
 	private void checkInputString() {
 		if(Input.ENTER_KEY.isClicked()) {
 			synchronized(monsters) {
@@ -247,11 +249,12 @@ public class Survive implements NState{
 	
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
-		//background
+		// Background
 		g.drawImage(Images.surviveBackground, 0, 0,
 				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getWidth()),
 				(int)TypeMaster.uiCamera.scale(Images.surviveBackground.getHeight()), null);
 		
+		// Draw monsters
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
 				g.setColor(new Color(0, 0, 0, 50));
@@ -273,12 +276,13 @@ public class Survive implements NState{
 				(int)wizard.getHeight(TypeMaster.gameCamera)/5);
 		wizard.draw(g2d, TypeMaster.gameCamera);
 		
-		//draw spells
+		// Draw spells
 		synchronized(spells){
 			for(Spell spell : spells)
 				spell.draw(g2d, TypeMaster.gameCamera, at);
 		}
 		
+		// Draw text
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
 				if(!wave.isBoss()) {
@@ -299,6 +303,7 @@ public class Survive implements NState{
 			}
 		}
 		
+		// Draw UI
 		Fonts.inputFont.draw(
 				TypeMaster.in.getCurrentString(),
 				(int)(castle.getCenterX() - Fonts.inputFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
