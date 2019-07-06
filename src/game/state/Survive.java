@@ -14,6 +14,7 @@ import game.entity.Castle;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Spell;
+import game.entity.SpellType;
 import game.entity.Wizard;
 import game.entity.WizardType;
 import game.entity.spell.Fireball;
@@ -90,6 +91,7 @@ public class Survive implements NState{
 	List<Spell> spells = new ArrayList<Spell>();
 	
 	Wave wave; // Current wave of monsters
+	Ring<SpellType> spellQueue = new Ring<SpellType>(); // Queue of spells
 	Ring<String> bossWords = new Ring<String>(); // Words that use to defeat boss
 	
 	@Override
@@ -103,6 +105,12 @@ public class Survive implements NState{
 		startTime = 0;
 		kills = 0;
 		end = false;
+		
+		//Fill spells queue
+		for(int i=0;i<15;i++) {
+			if(Random.randomInt(4)==0) spellQueue.add(SpellType.MagicMissile);
+			else spellQueue.add(SpellType.Fireball);
+		}
 		
 		castle.HP(10);
 		castle.setWidth(800);
@@ -199,6 +207,14 @@ public class Survive implements NState{
 		monsters.removeIf(monster -> monster.shouldDelete());
 	}
 	
+	private void castSpell(Monster monster) {
+		if(spellQueue.current() == SpellType.Fireball)
+			spells.add(new Fireball(monster, (int)wizard.getX(), (int)wizard.getY()));
+		else if(spellQueue.current() == SpellType.MagicMissile)
+			spells.add(new MagicMissile(monster, (int)wizard.getX(), (int)wizard.getY()));
+		spellQueue.next();
+	}
+	
 	// If it's boss, find nearest monster and check, is current spell typed
 	// If it's monsters, find monster with typed name
 	private void checkInputString() {
@@ -209,12 +225,12 @@ public class Survive implements NState{
 						for(Monster monster : monsters)
 							if(ModeSelection.diff == Difficulty.HARD) {
 								if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-									spells.add(new Fireball(monster, (int)wizard.getX(), (int)wizard.getY()));
+									castSpell(monster);
 									return;
 								}
 							}else if(ModeSelection.diff == Difficulty.EASY) {
 								if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
-									spells.add(new Fireball(monster, (int)wizard.getX(), (int)wizard.getY()));
+									castSpell(monster);
 									return;
 								}
 							}
@@ -228,13 +244,13 @@ public class Survive implements NState{
 						if(ModeSelection.diff == Difficulty.HARD) {
 							if(bossWords.current().equals(TypeMaster.in.getTypedString())) {
 								bossWords.next();
-								spells.add(new Fireball(nearest, (int)wizard.getX(), (int)wizard.getY()));
+								castSpell(nearest);
 								return;
 							}
 						}else if(ModeSelection.diff == Difficulty.EASY) {
 							if(bossWords.current().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
 								bossWords.next();
-								spells.add(new Fireball(nearest, (int)wizard.getX(), (int)wizard.getY()));
+								castSpell(nearest);
 								return;
 							}
 						}
