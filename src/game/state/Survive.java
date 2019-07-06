@@ -146,6 +146,7 @@ public class Survive implements NState{
 				
 				updateMonsters();
 				updateSpells();
+				deleteDeletable();
 				checkInputString();
 				if(Input.ESC_KEY.isClicked()) {
 					TypeMaster.in.typingOff();
@@ -187,9 +188,14 @@ public class Survive implements NState{
 				}
 				if(spell.getTarget().shoudDelete()) spell.setDeletable(true);
 			}
-			spells.removeIf(spell -> spell.shoudDelete() );
-			monsters.removeIf(monster -> monster.shoudDelete());
 		}
+	}
+	
+	public void deleteDeletable() {
+		synchronized (spells) {
+			spells.removeIf(spell -> spell.shoudDelete() );
+		}
+		monsters.removeIf(monster -> monster.shoudDelete());
 	}
 	
 	// If it's boss, find nearest monster and check, is current spell typed
