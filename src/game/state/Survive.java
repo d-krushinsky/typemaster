@@ -87,6 +87,7 @@ public class Survive implements NState{
 	List<Spell> spells = new ArrayList<Spell>();
 	
 	Wave wave; // Current wave of monsters
+	Ring<String> bossWords = new Ring<String>(); // Words that use to defeat boss
 	
 	@Override
 	public void install() {
@@ -239,11 +240,15 @@ public class Survive implements NState{
 		
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
-				Fonts.gameFont.draw(
-						monster.getName(),
-						(int)(monster.getCenterX()-(Fonts.gameFont.getStringWidth(monster.getName()))/2),
-						(int)(monster.getY()-Fonts.gameFont.getHeight()), 
-						g2d, TypeMaster.gameCamera);
+				if(!wave.isBoss()) {
+					Fonts.gameFont.draw(
+							monster.getName(),
+							(int)(monster.getCenterX()-(Fonts.gameFont.getStringWidth(monster.getName()))/2),
+							(int)(monster.getY()-Fonts.gameFont.getHeight()), 
+							g2d, TypeMaster.gameCamera);
+				}else {
+					
+				}
 			}
 		}
 		
