@@ -319,6 +319,39 @@ public class Survive implements NState{
 		}
 		
 		// Draw UI
+		g.setColor(new Color(0, 0, 0, 50));
+		g.fillRect(
+				(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH), 
+				(int)0, 
+				(int)TypeMaster.gameCamera.scale(Layout.SPELL_BAR_WIDTH), 
+				(int)TypeMaster.gameCamera.scale(Settings.DEFAULT_HEIGHT-castle.getHeight()));
+		g.setColor(Color.BLACK);
+		g.drawRect(
+				(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH), 
+				(int)0, 
+				(int)TypeMaster.gameCamera.scale(Layout.SPELL_BAR_WIDTH), 
+				(int)TypeMaster.gameCamera.scale(Settings.DEFAULT_HEIGHT-castle.getHeight()));
+		for(int i=0;i<15;i++) {
+			switch(spellQueue.getRight(i)){
+			case Fireball:
+				g.setColor(Color.RED);
+				g.fillOval(
+						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-32/2),
+						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-32-castle.getHeight()-32*i-2*i),
+						(int)TypeMaster.gameCamera.scale(32),
+						(int)TypeMaster.gameCamera.scale(32));
+				break;
+			case MagicMissile:
+				g.setColor(Color.CYAN);
+				g.fillOval(
+						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-32/2),
+						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-32-castle.getHeight()-32*i-2*i),
+						(int)TypeMaster.gameCamera.scale(32),
+						(int)TypeMaster.gameCamera.scale(32));
+				break;
+			}
+		}
+		
 		Fonts.inputFont.draw(
 				TypeMaster.in.getCurrentString(),
 				(int)(castle.getCenterX() - Fonts.inputFont.getStringWidth(TypeMaster.in.getCurrentString())/2),
