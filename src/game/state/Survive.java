@@ -14,9 +14,9 @@ import game.entity.Castle;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Spell;
-import game.entity.SpellType;
 import game.entity.Wizard;
 import game.entity.WizardType;
+import game.entity.spell.Fireball;
 import game.logic.Wave;
 import game.resources.Fonts;
 import game.resources.Images;
@@ -129,10 +129,10 @@ public class Survive implements NState{
 		if(end) {
 			endUI.perform(TypeMaster.in);
 		}else if(!paused){
+			ui.perform(TypeMaster.in);
 			speed = (1+ModeSelection.speed/10.0f) + (kills/12)/10.0f;
 			synchronized(monsters) {
 				if(castle.HP() <= 0) end = true;
-				ui.perform(TypeMaster.in);
 				
 				if(!wave.isOver()) {
 					if(wave.checkTime((System.currentTimeMillis()-startTime) / 1000.0f)) {
@@ -153,6 +153,7 @@ public class Survive implements NState{
 				}
 			}
 		}else {
+			ui.perform(TypeMaster.in);
 			if(Input.ESC_KEY.isClicked()) {
 				TypeMaster.in.typingOn();
 				paused = !paused;
@@ -201,16 +202,12 @@ public class Survive implements NState{
 						for(Monster monster : monsters)
 							if(ModeSelection.diff == Difficulty.HARD) {
 								if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-									spells.add(new Spell(
-											monster, SpellType.Fireball,
-											(int)wizard.getX(), (int)wizard.getY()));
+									spells.add(new Fireball(monster, (int)wizard.getX(), (int)wizard.getY()));
 									return;
 								}
 							}else if(ModeSelection.diff == Difficulty.EASY) {
 								if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
-									spells.add(new Spell(
-											monster, SpellType.Fireball,
-											(int)wizard.getX(), (int)wizard.getY()));
+									spells.add(new Fireball(monster, (int)wizard.getX(), (int)wizard.getY()));
 									return;
 								}
 							}
@@ -224,17 +221,13 @@ public class Survive implements NState{
 						if(ModeSelection.diff == Difficulty.HARD) {
 							if(bossWords.current().equals(TypeMaster.in.getTypedString())) {
 								bossWords.next();
-								spells.add(new Spell(
-										nearest, SpellType.Fireball,
-										(int)wizard.getX(), (int)wizard.getY()));
+								spells.add(new Fireball(nearest, (int)wizard.getX(), (int)wizard.getY()));
 								return;
 							}
 						}else if(ModeSelection.diff == Difficulty.EASY) {
 							if(bossWords.current().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
 								bossWords.next();
-								spells.add(new Spell(
-										nearest, SpellType.Fireball,
-										(int)wizard.getX(), (int)wizard.getY()));
+								spells.add(new Fireball(nearest, (int)wizard.getX(), (int)wizard.getY()));
 								return;
 							}
 						}
@@ -310,7 +303,6 @@ public class Survive implements NState{
 				g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("Kills: "+kills, 40, (int)(castle.getY()+(Fonts.gameFont.getHeight()*5)), g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("Failed "+(10-castle.HP())+"/10", 600, (int)(castle.getY()+(Fonts.gameFont.getHeight()*5)), g2d, TypeMaster.gameCamera);
-		ui.draw(g);
 		if(end) {
 			g.setColor(new Color(0, 0, 0, 100));
 			g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
@@ -329,5 +321,6 @@ public class Survive implements NState{
 					Settings.DEFAULT_HEIGHT/2 + Fonts.extraFont.getHeight()/2 ,
 					g2d, TypeMaster.gameCamera);
 		}
+		ui.draw(g2d);
 	}
 }

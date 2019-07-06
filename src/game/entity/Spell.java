@@ -8,7 +8,7 @@ import nightingale.graph.animation.NAnimation;
 import nightingale.graph.animation.NAnimator;
 import nightingale.util.NCamera;
 
-public class Spell extends Entity{
+public abstract class Spell extends Entity{
 	private Monster target;
 	private NAnimation animation;
 	private NAnimator animator = null;
@@ -25,9 +25,7 @@ public class Spell extends Entity{
 		return false;
 	}
 	
-	public void magic(List<Monster> list) {
-		
-	}
+	public abstract void magic(List<Monster> list);
 	
 	@Override
 	public void update() {

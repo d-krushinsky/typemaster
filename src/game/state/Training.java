@@ -12,9 +12,9 @@ import game.TypeMaster;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.entity.Spell;
-import game.entity.SpellType;
 import game.entity.Wizard;
 import game.entity.WizardType;
+import game.entity.spell.Fireball;
 import game.resources.Fonts;
 import game.resources.Images;
 import game.resources.Words;
@@ -77,7 +77,7 @@ public class Training implements NState{
 		
 		if(Input.ENTER_KEY.isClicked())
 			if(TypeMaster.in.getTypedString().equals(doll.getName())) {
-				spells.add(new Spell(doll, SpellType.Fireball, (int)wizard.getX(), (int)wizard.getY()));
+				spells.add(new Fireball(doll, (int)wizard.getX(), (int)wizard.getY()));
 			}else {
 				TypeMaster.in.setCurrentString(TypeMaster.in.getTypedString());
 				TypeMaster.in.restoreTypedString();

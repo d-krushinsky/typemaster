@@ -3,10 +3,10 @@ package game.logic;
 import java.util.List;
 
 import game.Layout;
-import game.TypeMaster;
 import game.entity.Monster;
 import game.entity.MonsterType;
 import game.resources.Words;
+import game.state.Settings;
 import util.Random;
 
 public class Wave {
@@ -51,7 +51,7 @@ public class Wave {
 			Monster monster = new Monster(types[Random.randomInt(types.length)], Words.getRandomWord());
 			monster.setY(-monster.getHeight());
 			monster.setX(Random.randomInt(Layout.SPAWN_LEFT_OFFSET,
-					                     (int)(TypeMaster.canvas.getWidth()-monster.getWidth()-Layout.SPELL_BAR_WIDTH)));
+					                     (int)(Settings.DEFAULT_WIDTH-monster.getWidth()-Layout.SPELL_BAR_WIDTH)));
 			monsters.add(monster);
 			genSpawnTime();
 		}
