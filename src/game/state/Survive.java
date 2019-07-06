@@ -50,7 +50,7 @@ public class Survive implements NState{
 	
 	public Survive() {
 		// All waves
-		waves.add(new Wave(false, Random.randomInt(3, 5), new MonsterType[]{ MonsterType.Goblin }, 1.5f, 3.2f)); //Goblins
+		waves.add(new Wave(false, Random.randomInt(14, 32), new MonsterType[]{ MonsterType.Goblin }, 1f, 3.2f)); //Goblins
 		waves.add(new Wave(true, Random.randomInt(1, 2), new MonsterType[]{ MonsterType.GoblinBoss }, 0, 1)); //Goblins boss
 		
 		ui.addElement("TO_MENU", new NButton("To Menu", 10, 546, 130, 44));
