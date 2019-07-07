@@ -360,6 +360,7 @@ public class Survive implements NState{
 		Fonts.gameFont.draw("Kills: "+kills, 40, (int)(castle.getY()+(Fonts.gameFont.getHeight()*5)), g2d, TypeMaster.gameCamera);
 		Fonts.gameFont.draw("Failed "+(10-castle.HP())+"/10", 600, (int)(castle.getY()+(Fonts.gameFont.getHeight()*5)), g2d, TypeMaster.gameCamera);
 		if(end) {
+			ui.draw(g2d);
 			g.setColor(new Color(0, 0, 0, 100));
 			g.fillRect(0, 0, TypeMaster.canvas.getWidth(), TypeMaster.canvas.getHeight());
 			endUI.draw(g);
@@ -376,7 +377,8 @@ public class Survive implements NState{
 					Settings.DEFAULT_WIDTH/2 - Fonts.gameFont.getStringWidth("(Press ESCAPE for unpause)")/2,
 					Settings.DEFAULT_HEIGHT/2 + Fonts.extraFont.getHeight()/2 ,
 					g2d, TypeMaster.gameCamera);
-		}
-		ui.draw(g2d);
+			ui.draw(g2d);
+		}else ui.draw(g2d);
+		
 	}
 }
