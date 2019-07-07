@@ -5,7 +5,7 @@ import nightingale.graph.animation.NAnimation;
 
 public enum SpellType {
 	Fireball (18, 30, Animations.fireball, 0.08f),
-	MagicMissile (18, 30, Animations.fireball, 0.09f);
+	MagicMissile (14, 30, Animations.magicmissile, 0.09f);
 	
 	private NAnimation anim;
 	private float animSpeed;

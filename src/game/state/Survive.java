@@ -139,7 +139,7 @@ public class Survive implements NState{
 			endUI.perform(TypeMaster.in);
 		}else if(!paused){
 			ui.perform(TypeMaster.in);
-			speed = (1+ModeSelection.speed/10.0f) + (kills/12)/10.0f;
+			speed = (0.5f+ModeSelection.speed/10.0f) + (kills/12)/10.0f;
 			synchronized(monsters) {
 				if(castle.HP() <= 0) end = true;
 				
@@ -334,20 +334,18 @@ public class Survive implements NState{
 		for(int i=0;i<15;i++) {
 			switch(spellQueue.getRight(i)){
 			case Fireball:
-				g.setColor(Color.RED);
-				g.fillOval(
-						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-32/2),
-						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-32-castle.getHeight()-32*i-2*i),
-						(int)TypeMaster.gameCamera.scale(32),
-						(int)TypeMaster.gameCamera.scale(32));
+				g.drawImage(Images.fireballIcon,
+						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-Images.fireballIcon.getWidth()/2),
+						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-Images.fireballIcon.getHeight()-castle.getHeight()-Images.fireballIcon.getHeight()*i-2*i),
+						(int)TypeMaster.gameCamera.scale(Images.fireballIcon.getWidth()),
+						(int)TypeMaster.gameCamera.scale(Images.fireballIcon.getHeight()), null);
 				break;
 			case MagicMissile:
-				g.setColor(Color.CYAN);
-				g.fillOval(
-						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-32/2),
-						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-32-castle.getHeight()-32*i-2*i),
-						(int)TypeMaster.gameCamera.scale(32),
-						(int)TypeMaster.gameCamera.scale(32));
+				g.drawImage(Images.magicmissileIcon,
+						(int)TypeMaster.gameCamera.getX(Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH/2-Images.magicmissileIcon.getWidth()/2),
+						(int)TypeMaster.gameCamera.getY(Settings.DEFAULT_HEIGHT-Images.magicmissileIcon.getHeight()-castle.getHeight()-Images.magicmissileIcon.getHeight()*i-2*i),
+						(int)TypeMaster.gameCamera.scale(Images.magicmissileIcon.getWidth()),
+						(int)TypeMaster.gameCamera.scale(Images.magicmissileIcon.getHeight()), null);
 				break;
 			}
 		}
