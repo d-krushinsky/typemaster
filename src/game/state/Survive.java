@@ -301,9 +301,13 @@ public class Survive implements NState{
 		synchronized(monsters) {
 			for(Monster monster : monsters) {
 				if(!wave.isBoss()) {
+					int x = (int)(monster.getCenterX()-(Fonts.gameFont.getStringWidth(monster.getName()))/2);
+					if(x<0) x = 0;
+					else if(x + Fonts.gameFont.getStringWidth(monster.getName()) > Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH) 
+						x = Settings.DEFAULT_WIDTH-Layout.SPELL_BAR_WIDTH - Fonts.gameFont.getStringWidth(monster.getName());
 					Fonts.gameFont.draw(
 							monster.getName(),
-							(int)(monster.getCenterX()-(Fonts.gameFont.getStringWidth(monster.getName()))/2),
+							x,
 							(int)(monster.getY()-Fonts.gameFont.getHeight()), 
 							g2d, TypeMaster.gameCamera);
 				}else {

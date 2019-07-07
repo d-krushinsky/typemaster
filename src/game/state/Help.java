@@ -57,7 +57,7 @@ public class Help implements NState{
 		Fonts.gameFont.draw("just use 'Training' button in mode selection menu.", 14, 235, g2d, TypeMaster.gameCamera);
 		
 		Fonts.gameFont.draw("I hope you having fun with this!", 14, 300, g2d, TypeMaster.gameCamera);
-		Fonts.gameFont.draw("Dmitriy Krushinskiy", 500, 430, g2d, TypeMaster.gameCamera);
+		Fonts.gameFont.draw("Dmitriy 'dyuz' Krushinskiy", 450, 430, g2d, TypeMaster.gameCamera);
 		ui.draw(g);
 	}
 	
