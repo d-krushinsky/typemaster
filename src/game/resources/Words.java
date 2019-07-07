@@ -1,6 +1,8 @@
 package game.resources;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +13,11 @@ public class Words {
 	private static String[] words;
 	
 	static {
-		FileReader fr;
 		Scanner scan;
 		try {
-			fr = new FileReader("data/words.tmr");
-			scan = new Scanner(fr);
+			InputStream in = Words.class.getResourceAsStream("/data/words.tmr"); 
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			scan = new Scanner(reader);
 			List<String> wordsList = new ArrayList<String>();
 			while(scan.hasNextLine()) {
 				String[] wr = scan.nextLine().split(",");
