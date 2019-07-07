@@ -42,5 +42,4 @@ public abstract class TypeInput extends NInput{
 			}
 		}
 	}
-	
 }

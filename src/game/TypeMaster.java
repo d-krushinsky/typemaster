@@ -20,8 +20,9 @@ public class TypeMaster {
 	private static final String SYMBOLS  = " !@#$%^&*()_+-=[]{};'\\:\"|,./<>?~";
 	private static final String NUMBERS  = "0123456789";
 	public  static final String ALPHABET = ENGLISH + SYMBOLS + NUMBERS;
+	public  static final String VERSION  = "alpha 0.1";
 	
-	public static JFrame gameFrame = new JFrame("Type master");
+	public static JFrame gameFrame = new JFrame("Type master("+VERSION+")");
 	public static Input in = new Input();
 	public static NCanvas canvas = new NCanvas(new Drawer());
 	public static Toolkit kit = Toolkit.getDefaultToolkit();

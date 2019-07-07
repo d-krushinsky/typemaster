@@ -37,7 +37,6 @@ public class Settings implements NState{
 		resolution = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 	
-	
 	// NState starts here
 	protected NActionListener listener = new SettingsListener();
 	public NUIGroup ui = new NUIGroup();

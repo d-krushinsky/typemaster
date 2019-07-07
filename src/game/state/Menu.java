@@ -55,6 +55,9 @@ public class Menu implements NState{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		ui.draw(g);
+		Fonts.gameFont.draw(TypeMaster.VERSION,
+				ui.getElement("TITLE").getRealX()+ui.getElement("TITLE").getRealWidth()/2+Fonts.gameFont.getStringWidth(TypeMaster.VERSION)/2,
+				ui.getElement("TITLE").getRealY()+ui.getElement("TITLE").getRealHeight(),
+				g2d, TypeMaster.uiCamera);
 	}
-	
 }

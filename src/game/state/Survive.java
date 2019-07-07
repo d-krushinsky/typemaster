@@ -34,7 +34,6 @@ import util.Random;
 import util.Ring;
 
 public class Survive implements NState{
-
 	protected float speed = 0;       // Monsters movement speed
 	protected int kills = 0;         // Count of kills
 	private boolean end = false;     // Is game ended
@@ -219,40 +218,38 @@ public class Survive implements NState{
 	// If it's monsters, find monster with typed name
 	private void checkInputString() {
 		if(Input.ENTER_KEY.isClicked()) {
-			synchronized(monsters) {
-				synchronized(spells) {
-					if(!wave.isBoss()) {
-						for(Monster monster : monsters)
-							if(ModeSelection.diff == Difficulty.HARD) {
-								if(monster.getName().equals(TypeMaster.in.getTypedString())) {
-									castSpell(monster);
-									return;
-								}
-							}else if(ModeSelection.diff == Difficulty.EASY) {
-								if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
-									castSpell(monster);
-									return;
-								}
-							}
-					}else {
-						Monster nearest = null;
-						for(Monster monster : monsters) {
-							if(nearest == null || monster.getY()+monster.getHeight() < nearest.getY()+nearest.getHeight()) {
-								nearest = monster;
-							}
-						}
+			synchronized(spells) {
+				if(!wave.isBoss()) {
+					for(Monster monster : monsters)
 						if(ModeSelection.diff == Difficulty.HARD) {
-							if(bossWords.current().equals(TypeMaster.in.getTypedString())) {
-								bossWords.next();
-								castSpell(nearest);
+							if(monster.getName().equals(TypeMaster.in.getTypedString())) {
+								castSpell(monster);
 								return;
 							}
 						}else if(ModeSelection.diff == Difficulty.EASY) {
-							if(bossWords.current().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
-								bossWords.next();
-								castSpell(nearest);
+							if(monster.getName().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+								castSpell(monster);
 								return;
 							}
+						}
+				}else {
+					Monster nearest = null;
+					for(Monster monster : monsters) {
+						if(nearest == null || monster.getY()+monster.getHeight() < nearest.getY()+nearest.getHeight()) {
+							nearest = monster;
+						}
+					}
+					if(ModeSelection.diff == Difficulty.HARD) {
+						if(bossWords.current().equals(TypeMaster.in.getTypedString())) {
+							bossWords.next();
+							castSpell(nearest);
+							return;
+						}
+					}else if(ModeSelection.diff == Difficulty.EASY) {
+						if(bossWords.current().toLowerCase().equals(TypeMaster.in.getTypedString().toLowerCase())) {
+							bossWords.next();
+							castSpell(nearest);
+							return;
 						}
 					}
 				}
@@ -381,6 +378,5 @@ public class Survive implements NState{
 					g2d, TypeMaster.gameCamera);
 			ui.draw(g2d);
 		}else ui.draw(g2d);
-		
 	}
 }

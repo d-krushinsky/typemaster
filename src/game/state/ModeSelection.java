@@ -98,5 +98,4 @@ public class ModeSelection implements NState{
 		else
 			ssUI.draw(g);
 	}
-	
 }

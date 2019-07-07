@@ -15,7 +15,6 @@ import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
 
 public class Help implements NState{
-
 	protected NActionListener listener = new HelpListener();
 	
 	public NUIGroup ui = new NUIGroup();
@@ -60,5 +59,4 @@ public class Help implements NState{
 		Fonts.gameFont.draw("Dmitriy 'dyuz' Krushinskiy", 450, 430, g2d, TypeMaster.gameCamera);
 		ui.draw(g);
 	}
-	
 }

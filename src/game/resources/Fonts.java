@@ -16,5 +16,4 @@ public abstract class Fonts {
 		inputFont.expand(1.7f);
 		spellFont.expand(1.2f);
 	}
-	
 }

@@ -107,6 +107,5 @@ public class Training implements NState{
 		}
 		
 		Fonts.extraFont.draw(TypeMaster.in.getCurrentString(), 300, 450, g2d, TypeMaster.gameCamera);
-	}
-	
+	}	
 }
